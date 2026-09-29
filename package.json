@@ -1,20 +1,6 @@
 {
   "name": "nsu-podium",
   "version": "1.0.0",
-  "description": "Official event website and registration platform for NSU PODIUM, organized by NSUDC — North South University Debate Club",
-  "main": "index.html",
-  "scripts": {
-    "build": "echo 'Static build ready'",
-    "start": "node serve.js",
-    "dev": "node serve.js"
-  },
-  "keywords": [
-    "nsu-podium",
-    "nsudc",
-    "north-south-university",
-    "debate-club",
-    "event-registration"
-  ],
-  "author": "NSUDC — North South University Debate Club",
-  "license": "ISC"
+  "private": true,
+  "description": "Official event website for NSU PODIUM 2026, organized by NSUDC — North South University Debate Club"
 }
