@@ -1,0 +1,26 @@
+{
+  "name": "institutional-event-registration-platform",
+  "version": "1.0.0",
+  "description": "Production-grade, extensible institutional and club event registration platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "event-registration",
+    "institutional-portal",
+    "university-clubs",
+    "conference",
+    "summit"
+  ],
+  "author": "Institutional Systems Division",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
