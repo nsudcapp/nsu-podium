@@ -1,131 +1,124 @@
 /**
- * Form Validation and Input Formatting Logic
- * Provides real-time field validation, accessible error announcements,
- * and Bangladeshi phone number parsing with flexible formatting.
+ * Form Validation and Input Handling for NSU PODIUM 2026
+ * Organizer: NSUDC — North South University Debate Club
  */
 
 class FormValidator {
   constructor(formElement) {
     this.form = formElement;
     this.fields = {
-      institutionName: this.form.querySelector('#institutionName'),
-      clubName: this.form.querySelector('#clubName'),
-      slots: this.form.querySelector('#slots'),
-      representativeName: this.form.querySelector('#representativeName'),
-      representativePhone: this.form.querySelector('#representativePhone')
+      fullName: this.form.querySelector('#fullName'),
+      studentId: this.form.querySelector('#studentId'),
+      department: this.form.querySelector('#department'),
+      batch: this.form.querySelector('#batch'),
+      email: this.form.querySelector('#email'),
+      phone: this.form.querySelector('#phone'),
+      eventPreference: this.form.querySelector('#eventPreference'),
+      terms: this.form.querySelector('#terms')
     };
 
-    this.initEventListeners();
+    this.initListeners();
   }
 
-  initEventListeners() {
-    // Real-time validation on blur
+  initListeners() {
     Object.keys(this.fields).forEach(key => {
-      const field = this.fields[key];
-      if (!field) return;
+      const input = this.fields[key];
+      if (!input) return;
 
-      field.addEventListener('blur', () => {
+      input.addEventListener('blur', () => {
         this.validateField(key);
       });
 
-      // Clear error state on input change
-      field.addEventListener('input', () => {
+      input.addEventListener('input', () => {
         this.clearFieldError(key);
       });
+
+      if (input.type === 'checkbox' || input.tagName === 'SELECT') {
+        input.addEventListener('change', () => {
+          this.validateField(key);
+        });
+      }
     });
 
-    // Special keyboard handling for Number of Slots stepper input
-    if (this.fields.slots) {
-      this.fields.slots.addEventListener('keydown', (e) => {
-        // Prevent typing scientific notation 'e', '+', '-', '.'
-        if (['e', 'E', '+', '-', '.'].includes(e.key)) {
-          e.preventDefault();
-        }
-      });
-
-      this.fields.slots.addEventListener('paste', (e) => {
-        const pasteData = (e.clipboardData || window.clipboardData).getData('text');
-        if (!/^\d+$/.test(pasteData)) {
-          e.preventDefault();
-        }
-      });
-    }
-
-    // Phone number input formatter/sanitizer
-    if (this.fields.representativePhone) {
-      this.fields.representativePhone.addEventListener('input', (e) => {
-        // Disallow letters
-        e.target.value = e.target.value.replace(/[^\d+ \-]/g, '');
+    // Sanitizer for phone number
+    if (this.fields.phone) {
+      this.fields.phone.addEventListener('input', (e) => {
+        e.target.value = e.target.value.replace(/[^\d+ \-()]/g, '');
       });
     }
   }
 
-  /**
-   * Validates Bangladeshi phone numbers flexibly
-   * Supports:
-   *  - Standard: 01712345678, 01812345678, 019..., 015..., 016..., 013..., 014...
-   *  - International prefix: +8801712345678, 8801712345678
-   *  - Formatted with hyphens/spaces: 01712-345678, +880 1712 345678
-   */
+  isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
   isValidPhone(phone) {
     if (!phone) return false;
-    const cleanNumber = phone.replace(/[\s\-\(\)]/g, '');
-
-    // Bangladeshi pattern check
-    // BD operators: 013, 014, 015, 016, 017, 018, 019
+    const clean = phone.replace(/[\s\-\(\)]/g, '');
     const bdRegex = /^(?:\+?880|880|0)?(1[3-9]\d{8})$/;
-    
-    // Also accept general international formats (10 to 15 digits) if foreign institution
-    const genericInternationalRegex = /^\+?[0-9]{8,15}$/;
-
-    return bdRegex.test(cleanNumber) || genericInternationalRegex.test(cleanNumber);
+    const intlRegex = /^\+?[0-9]{8,15}$/;
+    return bdRegex.test(clean) || intlRegex.test(clean);
   }
 
-  /**
-   * Validate individual field by key
-   */
   validateField(key) {
-    const field = this.fields[key];
-    if (!field) return true;
+    const el = this.fields[key];
+    if (!el) return true;
 
-    const value = field.value.trim();
-    let errorMessage = '';
+    const value = el.value ? el.value.trim() : '';
+    let errorMsg = '';
 
     switch (key) {
-      case 'institutionName':
+      case 'fullName':
+        if (!value || value.length < 2) {
+          errorMsg = 'Please enter your full name.';
+        }
+        break;
+
+      case 'studentId':
+        if (!value || value.length < 4) {
+          errorMsg = 'Please enter a valid Student ID number.';
+        }
+        break;
+
+      case 'department':
         if (!value) {
-          errorMessage = 'Institution name is required.';
+          errorMsg = 'Please select or enter your academic department.';
         }
         break;
 
-      case 'clubName':
+      case 'batch':
         if (!value) {
-          errorMessage = 'Club name is required.';
+          errorMsg = 'Please enter your academic batch (e.g. 212 or Spring 2022).';
         }
         break;
 
-      case 'slots':
-        const numSlots = Number(value);
-        if (!value || isNaN(numSlots) || !Number.isInteger(numSlots) || numSlots <= 0) {
-          errorMessage = 'Please enter a valid number of slots.';
+      case 'email':
+        if (!value || !this.isValidEmail(value)) {
+          errorMsg = 'Please enter a valid institutional or personal email address.';
         }
         break;
 
-      case 'representativeName':
-        if (!value) {
-          errorMessage = 'Representative name is required.';
-        }
-        break;
-
-      case 'representativePhone':
+      case 'phone':
         if (!value || !this.isValidPhone(value)) {
-          errorMessage = 'Please enter a valid contact number.';
+          errorMsg = 'Please enter a valid contact phone number.';
+        }
+        break;
+
+      case 'eventPreference':
+        if (!value) {
+          errorMsg = 'Please select your participation category.';
+        }
+        break;
+
+      case 'terms':
+        if (!el.checked) {
+          errorMsg = 'You must agree to the event guidelines and code of conduct.';
         }
         break;
     }
 
-    if (errorMessage) {
-      this.setFieldError(key, errorMessage);
+    if (errorMsg) {
+      this.setFieldError(key, errorMsg);
       return false;
     } else {
       this.clearFieldError(key);
@@ -133,67 +126,51 @@ class FormValidator {
     }
   }
 
-  /**
-   * Set field error and accessibility states
-   */
-  setFieldError(key, message) {
-    const field = this.fields[key];
-    const group = field.closest('.form-group');
+  setFieldError(key, msg) {
+    const el = this.fields[key];
+    if (!el) return;
+    const group = el.closest('.form-group') || el.closest('.form-group-full');
     if (!group) return;
 
     group.classList.add('has-error');
-    field.setAttribute('aria-invalid', 'true');
+    el.setAttribute('aria-invalid', 'true');
 
-    const errorEl = group.querySelector('.error-message-text');
-    if (errorEl) {
-      errorEl.textContent = message;
-    }
+    const errSpan = group.querySelector('.error-message-text');
+    if (errSpan) errSpan.textContent = msg;
   }
 
-  /**
-   * Clear error state
-   */
   clearFieldError(key) {
-    const field = this.fields[key];
-    const group = field.closest('.form-group');
+    const el = this.fields[key];
+    if (!el) return;
+    const group = el.closest('.form-group') || el.closest('.form-group-full');
     if (!group) return;
 
     group.classList.remove('has-error');
-    field.setAttribute('aria-invalid', 'false');
+    el.setAttribute('aria-invalid', 'false');
 
-    const errorEl = group.querySelector('.error-message-text');
-    if (errorEl) {
-      errorEl.textContent = '';
-    }
+    const errSpan = group.querySelector('.error-message-text');
+    if (errSpan) errSpan.textContent = '';
   }
 
-  /**
-   * Validate all form fields
-   */
   validateAll() {
-    let isValid = true;
-    let firstErrorField = null;
+    let allValid = true;
+    let firstError = null;
 
     Object.keys(this.fields).forEach(key => {
-      const fieldValid = this.validateField(key);
-      if (!fieldValid) {
-        isValid = false;
-        if (!firstErrorField) {
-          firstErrorField = this.fields[key];
-        }
+      const valid = this.validateField(key);
+      if (!valid) {
+        allValid = false;
+        if (!firstError) firstError = this.fields[key];
       }
     });
 
-    if (firstErrorField) {
-      firstErrorField.focus();
+    if (firstError) {
+      firstError.focus();
     }
 
-    return isValid;
+    return allValid;
   }
 
-  /**
-   * Reset all fields and errors
-   */
   reset() {
     this.form.reset();
     Object.keys(this.fields).forEach(key => {
@@ -202,5 +179,4 @@ class FormValidator {
   }
 }
 
-// Export for app usage
 window.FormValidator = FormValidator;

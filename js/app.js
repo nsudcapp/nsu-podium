@@ -1,12 +1,12 @@
 /**
- * Main Application Controller for NSU PODIUM
+ * Main Application Controller for NSU PODIUM 2026
  * Organizer: NSUDC — North South University Debate Club
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   // DOM Elements
-  const registrationForm = document.getElementById('eventRegistrationForm');
-  const formCard = document.getElementById('registrationFormCard');
+  const form = document.getElementById('podiumRegistrationForm');
+  const formCard = document.getElementById('registrationCard');
   const successCard = document.getElementById('successCard');
   const submitBtn = document.getElementById('submitBtn');
   const submitBtnText = document.getElementById('submitBtnText');
@@ -14,28 +14,35 @@ document.addEventListener('DOMContentLoaded', () => {
   const formGlobalAlert = document.getElementById('formGlobalAlert');
   const formGlobalAlertText = document.getElementById('formGlobalAlertText');
 
-  // Input & Success Elements
-  const slotsInput = document.getElementById('slots');
+  // Success Card Elements
   const refIdDisplay = document.getElementById('refIdDisplay');
+  const copyRefBtn = document.getElementById('copyRefBtn');
   const newRegistrationBtn = document.getElementById('newRegistrationBtn');
+  const receiptName = document.getElementById('receiptName');
+  const receiptId = document.getElementById('receiptId');
+  const receiptDept = document.getElementById('receiptDept');
+  const receiptTrack = document.getElementById('receiptTrack');
 
-  // Navigation Elements
+  // Navigation
   const siteHeader = document.getElementById('siteHeader');
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const mobileNav = document.getElementById('mobileNav');
-  const mobileNavLinks = document.querySelectorAll('.mobile-nav .nav-item-link');
+  const navLinks = document.querySelectorAll('.nav-item-link');
 
   // Initialize Validator
-  const validator = new FormValidator(registrationForm);
+  let validator = null;
+  if (form) {
+    validator = new FormValidator(form);
+  }
 
   // =========================================================================
-  // SUBMISSION LIFECYCLE
+  // SUBMISSION CONTROLLER
   // =========================================================================
   function setSubmitLoading(isLoading) {
     if (isLoading) {
       submitBtn.disabled = true;
       if (submitSpinner) submitSpinner.style.display = 'inline-block';
-      if (submitBtnText) submitBtnText.textContent = 'Submitting...';
+      if (submitBtnText) submitBtnText.textContent = 'Processing Registration...';
       if (formGlobalAlert) formGlobalAlert.style.display = 'none';
     } else {
       submitBtn.disabled = false;
@@ -49,61 +56,103 @@ document.addEventListener('DOMContentLoaded', () => {
     if (formGlobalAlert) formGlobalAlert.style.display = 'flex';
   }
 
-  if (registrationForm) {
-    registrationForm.addEventListener('submit', async (e) => {
+  if (form) {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // 1. Client-side field validation for all 5 fields
-      const isValid = validator.validateAll();
-      if (!isValid) return;
+      if (!validator.validateAll()) return;
 
-      // 2. Prepare payload
       const payload = {
-        institutionName: document.getElementById('institutionName').value,
-        clubName: document.getElementById('clubName').value,
-        slots: slotsInput.value,
-        representativeName: document.getElementById('representativeName').value,
-        representativePhone: document.getElementById('representativePhone').value
+        fullName: document.getElementById('fullName').value,
+        studentId: document.getElementById('studentId').value,
+        department: document.getElementById('department').value,
+        batch: document.getElementById('batch').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        eventPreference: document.getElementById('eventPreference').value
       };
 
       setSubmitLoading(true);
 
       try {
-        // 3. Submit via Storage/API Service
-        const result = await window.registrationService.submitRegistration(payload);
+        const record = await window.registrationService.submitRegistration(payload);
 
-        // 4. Render Success State
-        if (refIdDisplay) {
-          refIdDisplay.textContent = result.referenceId;
-        }
+        // Populate receipt
+        if (refIdDisplay) refIdDisplay.textContent = record.referenceId;
+        if (receiptName) receiptName.textContent = record.fullName;
+        if (receiptId) receiptId.textContent = record.studentId;
+        if (receiptDept) receiptDept.textContent = record.department;
+        if (receiptTrack) receiptTrack.textContent = record.eventPreference;
 
-        // Hide form and show success state
-        registrationForm.style.display = 'none';
+        // Switch to success card
+        form.style.display = 'none';
         if (successCard) {
           successCard.classList.add('active');
           successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
-
-      } catch (error) {
-        showGlobalAlert(error.message || 'An unexpected error occurred. Please try again.');
+      } catch (err) {
+        showGlobalAlert(err.message || 'An error occurred during submission. Please try again.');
       } finally {
         setSubmitLoading(false);
       }
     });
   }
 
-  // Action to submit another registration
+  // Copy Reference ID
+  if (copyRefBtn) {
+    copyRefBtn.addEventListener('click', () => {
+      const id = refIdDisplay ? refIdDisplay.textContent : '';
+      if (!id) return;
+
+      navigator.clipboard.writeText(id).then(() => {
+        const originalText = copyRefBtn.innerHTML;
+        copyRefBtn.innerHTML = `
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          Copied to Clipboard!
+        `;
+        copyRefBtn.style.backgroundColor = '#15803d';
+        copyRefBtn.style.color = '#ffffff';
+
+        setTimeout(() => {
+          copyRefBtn.innerHTML = originalText;
+          copyRefBtn.style.backgroundColor = '';
+          copyRefBtn.style.color = '';
+        }, 2200);
+      });
+    });
+  }
+
+  // Register Another Delegate
   if (newRegistrationBtn) {
     newRegistrationBtn.addEventListener('click', () => {
-      validator.reset();
+      if (validator) validator.reset();
       if (successCard) successCard.classList.remove('active');
-      if (registrationForm) registrationForm.style.display = 'block';
+      if (form) form.style.display = 'block';
       if (formCard) formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   }
 
   // =========================================================================
-  // NAVIGATION & SCROLL EVENTS
+  // FAQ ACCORDION
+  // =========================================================================
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const btn = item.querySelector('.faq-question-btn');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('active');
+        faqItems.forEach(other => other.classList.remove('active'));
+        if (!isOpen) {
+          item.classList.add('active');
+        }
+      });
+    }
+  });
+
+  // =========================================================================
+  // NAVIGATION & SCROLLSPY
   // =========================================================================
   if (siteHeader) {
     window.addEventListener('scroll', () => {
@@ -117,51 +166,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (mobileMenuBtn && mobileNav) {
     mobileMenuBtn.addEventListener('click', () => {
-      const isOpen = mobileNav.classList.toggle('open');
-      mobileMenuBtn.setAttribute('aria-expanded', isOpen.toString());
+      mobileNav.classList.toggle('open');
     });
   }
 
-  if (mobileNavLinks && mobileNav) {
-    mobileNavLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        mobileNav.classList.remove('open');
-        if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false');
-      });
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (mobileNav) mobileNav.classList.remove('open');
     });
-  }
+  });
 
-  // Event Countdown Timer
-  function initCountdown() {
-    const eventDate = new Date('2026-11-14T09:00:00+06:00').getTime();
-    const daysEl = document.getElementById('countdownDays');
-    const hoursEl = document.getElementById('countdownHours');
-    const minsEl = document.getElementById('countdownMins');
+  // Scrollspy: active nav indicator
+  const sections = document.querySelectorAll('section[id]');
+  function updateScrollspy() {
+    const scrollY = window.pageYOffset + 120;
 
-    if (!daysEl || !hoursEl || !minsEl) return;
+    sections.forEach(current => {
+      const sectionHeight = current.offsetHeight;
+      const sectionTop = current.offsetTop;
+      const sectionId = current.getAttribute('id');
 
-    function update() {
-      const now = new Date().getTime();
-      const distance = eventDate - now;
-
-      if (distance < 0) {
-        daysEl.textContent = '00';
-        hoursEl.textContent = '00';
-        minsEl.textContent = '00';
-        return;
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        navLinks.forEach(link => {
+          if (link.getAttribute('href') === `#${sectionId}`) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
       }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-      daysEl.textContent = String(days).padStart(2, '0');
-      hoursEl.textContent = String(hours).padStart(2, '0');
-      minsEl.textContent = String(minutes).padStart(2, '0');
-    }
-
-    update();
-    setInterval(update, 60000);
+    });
   }
-  initCountdown();
+  window.addEventListener('scroll', updateScrollspy);
 });
