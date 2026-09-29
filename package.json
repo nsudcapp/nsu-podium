@@ -1,20 +1,20 @@
 {
-  "name": "institutional-event-registration-platform",
+  "name": "nsu-podium",
   "version": "1.0.0",
-  "description": "Production-grade, extensible institutional and club event registration platform",
+  "description": "Official event website and registration platform for NSU PODIUM, organized by NSUDC — North South University Debate Club",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
   "keywords": [
-    "event-registration",
-    "institutional-portal",
-    "university-clubs",
-    "conference",
-    "summit"
+    "nsu-podium",
+    "nsudc",
+    "north-south-university",
+    "debate-club",
+    "event-registration"
   ],
-  "author": "Institutional Systems Division",
+  "author": "NSUDC — North South University Debate Club",
   "license": "ISC",
   "dependencies": {
     "express": "^4.19.2",
