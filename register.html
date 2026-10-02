@@ -1,64 +1,228 @@
-<!-- Scripts -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NSU PODIUM | Team Registration (Bangla)</title>
+  <meta name="description" content="Official Team Registration (Bangla) portal for NSU PODIUM 2026. Organized by NSUDC — North South University Debate Club.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300f0ff'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5z'/%3E%3Cpath d='M2 17l10 5 10-5' fill='%23facc15'/%3E%3Cpath d='M2 12l10 5 10-5' fill='%231e40ff'/%3E%3C/svg%3E">
+  
+  <!-- Google Fonts: Press Start 2P, Chakra Petch, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
 
-<!-- Official Supabase JS Client -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Retro Grid & Dot Pattern Background -->
+  <div class="retro-grid-bg" aria-hidden="true"></div>
 
-<!-- Direct Supabase Client -->
-<script>
-  const PODIUM_SUPABASE_URL =
-    "https://tgqftmluyhuxikeoaglp.supabase.co";
+  <div class="arcade-page-wrapper">
 
-  const PODIUM_SUPABASE_KEY =
-    "sb_publishable_EfuSu4ppSHtigQPrXjB4vA_0aWelCj6";
+    <!-- Top Navigation Bar to return to Page 1 -->
+    <header class="brand-marquee-header">
+      <a href="index.html" class="brand-marquee-logo-link" aria-label="Back to NSU PODIUM Home">
+        <img
+          src="https://i.postimg.cc/C1Hty9d0/main-logo-(2).png"
+          alt="NSU PODIUM 2026 Logo"
+          class="brand-marquee-logo-img"
+          loading="eager"
+        >
+      </a>
+      <a href="index.html" class="brand-marquee-badge" style="text-decoration: none;">
+        ← MAIN ARENA
+      </a>
+    </header>
 
-  let podiumSupabaseClient = null;
+    <!-- Main Arcade Cabinet Screen Container (Matching Reference Image 2) -->
+    <main class="arcade-screen-container" id="registrationScreen">
 
-  function getSupabaseClient() {
+      <!-- Top Section: Logo Placement + Required Headings -->
+      <section class="p2-header-section">
+        
+        <!-- Provided NSU PODIUM Logo (Prominently placed in the designated logo area) -->
+        <div class="p2-logo-container" aria-label="NSU PODIUM Official Logo">
+          <img
+            src="https://i.postimg.cc/C1Hty9d0/main-logo-(2).png"
+            alt="NSU PODIUM 2026 Logo"
+            class="p2-logo-img"
+            loading="eager"
+          >
+        </div>
 
-    if (podiumSupabaseClient) {
-      return podiumSupabaseClient;
-    }
+        <!-- Required Title & Subheading (Both Styled in Matching Blue) -->
+        <h1 class="p2-main-title">NSU PODIUM</h1>
+        <h2 class="p2-sub-title">Team Registration (Bangla)</h2>
+        <p class="p2-caption">Fill in your details to join the game.</p>
+      </section>
 
-    if (
-      !window.supabase ||
-      typeof window.supabase.createClient !== "function"
-    ) {
-      console.error("[Supabase] Supabase library failed to load.");
-      return null;
-    }
+      <!-- Center Registration Card (Matching Reference Image 2) -->
+      <section class="arcade-form-card" aria-label="Registration Form Card">
 
-    try {
-      podiumSupabaseClient = window.supabase.createClient(
-        PODIUM_SUPABASE_URL,
-        PODIUM_SUPABASE_KEY
-      );
+        <!-- Form Card Header: Insert your details / All fields are required -->
+        <div class="form-card-header">
+          <h3 class="form-card-title">Insert your details</h3>
+          <p class="form-card-subtitle">All fields are required.</p>
+        </div>
 
-      window.supabaseClient = podiumSupabaseClient;
+        <!-- Registration Form with EXACTLY the 5 Specified Inputs -->
+        <form id="banglaRegistrationForm" class="p2-form" novalidate>
+          
+          <!-- 1. Institution/Club Name -->
+          <div class="form-field-group">
+            <label for="institutionClubName" class="field-label">Institution/Club Name</label>
+            <input
+              type="text"
+              id="institutionClubName"
+              name="institutionClubName"
+              class="field-input"
+              placeholder="e.g. North South University / NSUDC"
+              required
+              autocomplete="organization"
+            >
+            <span class="field-error-text" id="institutionClubNameError">Institution/Club Name is required.</span>
+          </div>
 
-      console.log(
-        "[Supabase] Client ready:",
-        PODIUM_SUPABASE_URL
-      );
+          <!-- 2. Representative Name -->
+          <div class="form-field-group">
+            <label for="representativeName" class="field-label">Representative Name</label>
+            <input
+              type="text"
+              id="representativeName"
+              name="representativeName"
+              class="field-input"
+              placeholder="e.g. Tanvir Ahmed"
+              required
+              autocomplete="name"
+            >
+            <span class="field-error-text" id="representativeNameError">Representative Name is required.</span>
+          </div>
 
-      return podiumSupabaseClient;
+          <!-- 3. Contact No -->
+          <div class="form-field-group">
+            <label for="contactNo" class="field-label">Contact No</label>
+            <input
+              type="text"
+              id="contactNo"
+              name="contactNo"
+              class="field-input"
+              placeholder="+880 1XXX XXXXXX"
+              required
+              autocomplete="tel"
+            >
+            <span class="field-error-text" id="contactNoError">Valid Contact No is required.</span>
+          </div>
 
-    } catch (error) {
-      console.error(
-        "[Supabase] Client initialization failed:",
-        error
-      );
+          <!-- 4. Email -->
+          <div class="form-field-group">
+            <label for="email" class="field-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="field-input"
+              placeholder="representative@example.com"
+              required
+              autocomplete="email"
+            >
+            <span class="field-error-text" id="emailError">Valid email is required.</span>
+          </div>
 
-      return null;
-    }
-  }
+          <!-- 5. Number of Slots (Dropdown: ONLY 1, 2, 3, 4) -->
+          <div class="form-field-group">
+            <label for="slots" class="field-label">Number of Slots</label>
+            <select id="slots" name="slots" class="field-select" required>
+              <option value="" disabled selected>Select number of slots</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+            <span class="field-error-text" id="slotsError">Choose number of slots (1-4).</span>
+          </div>
 
-  window.getSupabaseClient = getSupabaseClient;
+          <!-- Submit Button: Register -->
+          <button type="submit" id="registerSubmitBtn" class="arcade-btn-yellow p2-submit-btn">
+            Register
+          </button>
+        </form>
 
-  getSupabaseClient();
-</script>
+        <!-- Success Confirmation State (Displayed on successful submission) -->
+        <div id="p2SuccessCard" class="p2-success-card" role="region" aria-live="polite">
+          <h3 class="p2-success-title">REGISTRATION CONFIRMED!</h3>
+          <p class="p2-success-subtitle">
+            Your team details for <strong>NSU PODIUM Team Registration (Bangla)</strong> have been received.
+          </p>
 
-<!-- Storage and Registration Service -->
-<script src="/js/storage.js"></script>
+          <div class="p2-ref-box">
+            <div class="p2-ref-label">YOUR TEAM REFERENCE ID</div>
+            <div class="p2-ref-code" id="receiptRefId">PODIUM-2026-XXXXX</div>
+          </div>
 
-<!-- Main Application Controller -->
-<script src="/js/app.js"></script>
+          <table class="p2-receipt-table" aria-label="Registration Summary">
+            <tbody>
+              <tr>
+                <th scope="row">Institution/Club</th>
+                <td id="receiptInstClub">—</td>
+              </tr>
+              <tr>
+                <th scope="row">Representative</th>
+                <td id="receiptRepName">—</td>
+              </tr>
+              <tr>
+                <th scope="row">Contact No</th>
+                <td id="receiptContactNo">—</td>
+              </tr>
+              <tr>
+                <th scope="row">Email</th>
+                <td id="receiptEmail">—</td>
+              </tr>
+              <tr>
+                <th scope="row">Number of Slots</th>
+                <td id="receiptSlots">—</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="p2-actions-row">
+            <button type="button" class="p2-btn-secondary" id="registerAnotherBtn">
+              Register Another Team
+            </button>
+            <a href="index.html" class="p2-btn-secondary">
+              ← Return to Arena
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Return navigation link -->
+      <nav class="return-nav-bar" aria-label="Secondary Navigation">
+        <a href="index.html" class="return-nav-link">
+          ← Back to Main Arena
+        </a>
+      </nav>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="arcade-page-footer">
+      <p class="arcade-footer-text">
+        &copy; 2026 NSU PODIUM • NSUDC — North South University Debate Club
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- Scripts: Supabase SDK -> /js/supabase.js -> /js/storage.js -> /js/app.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/supabase.js"></script>
+  <script src="/js/storage.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

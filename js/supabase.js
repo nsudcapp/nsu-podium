@@ -1,4 +1,3 @@
-```js
 /**
  * NSU PODIUM 2026
  * Supabase Client
@@ -13,7 +12,6 @@ const SUPABASE_ANON_KEY =
 let supabaseClient = null;
 
 function getSupabaseClient() {
-
   if (supabaseClient) {
     return supabaseClient;
   }
@@ -27,11 +25,12 @@ function getSupabaseClient() {
   }
 
   try {
-
     supabaseClient = window.supabase.createClient(
       SUPABASE_URL,
       SUPABASE_ANON_KEY
     );
+
+    window.supabaseClient = supabaseClient;
 
     console.log(
       "[Supabase] Client initialized:",
@@ -39,9 +38,7 @@ function getSupabaseClient() {
     );
 
     return supabaseClient;
-
   } catch (error) {
-
     console.error(
       "[Supabase] Client initialization failed:",
       error
@@ -60,4 +57,3 @@ window.SUPABASE_CONFIG = {
 };
 
 getSupabaseClient();
-```
