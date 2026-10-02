@@ -2,48 +2,49 @@
  * Storage and Registration Service Layer for NSU PODIUM 2026
  * Organizer: NSUDC — North South University Debate Club
  *
- * Handles team registration with local persistence,
- * duplicate protection, and anti-spam rate limiting.
+ * Handles team registration with Supabase backend,
+ * local persistence, duplicate protection, and rate limiting.
  */
 
-const STORAGE_KEY = 'nsu_podium_team_registrations_2026';
-const RATE_LIMIT_KEY = 'podium_team_last_submission_time';
-const RATE_LIMIT_MS = 2000; // 2 seconds throttle
-
-const DEFAULT_SEEDS = [
-  {
-    referenceId: "PODIUM-2026-A82F1",
-    institutionClubName: "North South University / NSUDC",
-    representativeName: "Tanvir Ahmed",
-    contactNo: "+880 1712-345678",
-    email: "representative@nsudc.org",
-    slots: "2",
-    status: "Confirmed",
-    registrationDate: new Date("2026-09-20T10:30:00Z").toISOString()
-  }
-];
+const STORAGE_KEY = "nsu_podium_team_registrations_2026";
+const RATE_LIMIT_KEY = "podium_team_last_submission_time";
+const RATE_LIMIT_MS = 4000;
 
 class RegistrationService {
+
   constructor() {
-    this.memoryStore = [...DEFAULT_SEEDS];
+    this.memoryStore = [];
+
+    console.log("NSU PODIUM Registration Service initialized.");
+
     this.initStorage();
   }
 
   initStorage() {
     try {
       const existing = localStorage.getItem(STORAGE_KEY);
+
       if (!existing) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_SEEDS));
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify([])
+        );
       }
     } catch (e) {
-      console.warn("Storage notice: LocalStorage restricted. Using in-memory store.", e);
+      console.warn(
+        "Storage notice: LocalStorage restricted. Using in-memory store.",
+        e
+      );
     }
   }
 
   getRegistrations() {
     try {
       const data = localStorage.getItem(STORAGE_KEY);
-      return data ? JSON.parse(data) : this.memoryStore;
+
+      return data
+        ? JSON.parse(data)
+        : this.memoryStore;
     } catch (e) {
       return this.memoryStore;
     }
@@ -51,123 +52,247 @@ class RegistrationService {
 
   saveRegistrations(list) {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(list)
+      );
     } catch (e) {
       this.memoryStore = list;
     }
   }
 
   generateReferenceId() {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-    let code = '';
+    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    let code = "";
+
     for (let i = 0; i < 5; i++) {
-      code += chars.charAt(Math.floor(Math.random() * chars.length));
+      code += chars.charAt(
+        Math.floor(Math.random() * chars.length)
+      );
     }
+
     return `PODIUM-2026-${code}`;
   }
 
   isRateLimited() {
-    const last = sessionStorage.getItem(RATE_LIMIT_KEY);
-    if (!last) return false;
-    return Date.now() - parseInt(last, 10) < RATE_LIMIT_MS;
+    try {
+      const last = sessionStorage.getItem(RATE_LIMIT_KEY);
+
+      if (!last) {
+        return false;
+      }
+
+      return (
+        Date.now() - parseInt(last, 10) < RATE_LIMIT_MS
+      );
+    } catch (e) {
+      return false;
+    }
+  }
+
+  normalizePhone(phone) {
+    return (phone || "")
+      .replace(/[\s-\(\)]/g, "")
+      .trim();
+  }
+
+  normalizeEmail(email) {
+    return (email || "")
+      .trim()
+      .toLowerCase();
   }
 
   checkDuplicate(contactNo, email) {
     const all = this.getRegistrations();
-    const cleanPhone = (contactNo || '').replace(/[\s\-\(\)]/g, '');
-    const cleanEmail = (email || '').trim().toLowerCase();
+
+    const cleanPhone = this.normalizePhone(contactNo);
+    const cleanEmail = this.normalizeEmail(email);
 
     return all.find(item => {
-      const itemPhone = (item.contactNo || '').replace(/[\s\-\(\)]/g, '');
-      const itemEmail = (item.email || '').trim().toLowerCase();
+      const itemPhone = this.normalizePhone(item.contactNo);
+      const itemEmail = this.normalizeEmail(item.email);
 
-      return (cleanPhone && itemPhone && itemPhone === cleanPhone) ||
-             (cleanEmail && itemEmail && itemEmail === cleanEmail);
+      return (
+        (
+          cleanPhone &&
+          itemPhone &&
+          itemPhone === cleanPhone
+        ) ||
+        (
+          cleanEmail &&
+          itemEmail &&
+          itemEmail === cleanEmail
+        )
+      );
     });
   }
 
   async submitRegistration(payload) {
+
     if (this.isRateLimited()) {
-      throw new Error("Please wait a moment before submitting another registration.");
+      throw new Error(
+        "Please wait a few seconds before submitting another registration."
+      );
     }
 
-    // Realistic UI processing latency
-    await new Promise(resolve => setTimeout(resolve, 250));
+    const institutionClubName =
+      (payload.institutionClubName || "").trim();
 
-    // Client-side Duplicate check
+    const representativeName =
+      (payload.representativeName || "").trim();
+
+    const contactNo =
+      (payload.contactNo || "").trim();
+
+    const email =
+      this.normalizeEmail(payload.email);
+
+    const slots =
+      (payload.slots || "").toString().trim();
+
+    if (
+      !institutionClubName ||
+      !representativeName ||
+      !contactNo ||
+      !email ||
+      !slots
+    ) {
+      throw new Error(
+        "Please complete all required registration fields."
+      );
+    }
+
     const duplicate = this.checkDuplicate(
-      payload.contactNo,
-      payload.email
+      contactNo,
+      email
     );
 
     if (duplicate) {
       throw new Error(
-        `A registration already exists with this Contact No (${duplicate.contactNo}) or Email (${duplicate.email}). Existing Reference ID: ${duplicate.referenceId}`
+        "A registration with this Contact No or Email already exists."
       );
     }
 
-    // 1. Generate unique reference ID in required format: PODIUM-2026-XXXXX
-    const refId = this.generateReferenceId();
-    const currentDate = new Date().toISOString();
-    const parsedSlots = parseInt(payload.slots, 10);
-    const slotsCount = isNaN(parsedSlots) ? 1 : parsedSlots;
+    const parsedSlots = parseInt(slots, 10);
 
-    // 2. Prepare payload formatted EXACTLY for public.bangla_registrations
+    const slotsCount = isNaN(parsedSlots)
+      ? 1
+      : parsedSlots;
+
+    const referenceId =
+      this.generateReferenceId();
+
+    const registrationDate =
+      new Date().toISOString();
+
     const supabaseRecord = {
-      reference_id: refId,
-      institution_club_name: (payload.institutionClubName || '').trim(),
-      representative_name: (payload.representativeName || '').trim(),
-      contact_no: (payload.contactNo || '').trim(),
-      email: (payload.email || '').trim().toLowerCase(),
+      reference_id: referenceId,
+      institution_club_name: institutionClubName,
+      representative_name: representativeName,
+      contact_no: contactNo,
+      email: email,
       number_of_slots: slotsCount,
       status: "Confirmed",
-      registration_date: currentDate
+      registration_date: registrationDate
     };
 
-    // 3. Insert into Supabase table public.bangla_registrations
-    const supabase = (typeof window.getSupabaseClient === 'function' && window.getSupabaseClient()) || window.supabaseClient;
+    const supabase =
+      typeof window.getSupabaseClient === "function"
+        ? window.getSupabaseClient()
+        : window.supabaseClient;
 
-    if (supabase) {
-      console.log('[Supabase] Inserting registration into public.bangla_registrations...', supabaseRecord);
-      const { data, error } = await supabase
-        .from('bangla_registrations')
-        .insert([supabaseRecord]);
+    if (!supabase) {
+      console.error(
+        "[Supabase] Client not available."
+      );
 
-      if (error) {
-        console.error('[Supabase Insert Error]:', error);
-        if (error.code === '23505') {
-          throw new Error('A team registration with this Contact No or Email already exists in Supabase.');
-        }
-        throw new Error(`Supabase registration error: ${error.message || 'Failed to save to database.'}`);
-      }
-
-      console.log('[Supabase] Successfully saved to public.bangla_registrations:', supabaseRecord);
-    } else {
-      console.warn(
-        '[Supabase Notice] Supabase credentials not set or using placeholders. ' +
-        'Update js/supabase.js with your project URL and publishable anon key to write to Supabase directly.'
+      throw new Error(
+        "Registration service is not connected to the database. Please try again."
       );
     }
 
-    // 4. Persistence for receipt UI and local backup
-    const newRecord = {
-      referenceId: refId,
-      institutionClubName: supabaseRecord.institution_club_name,
-      representativeName: supabaseRecord.representative_name,
-      contactNo: supabaseRecord.contact_no,
-      email: supabaseRecord.email,
-      slots: String(supabaseRecord.number_of_slots),
-      status: supabaseRecord.status,
-      registrationDate: supabaseRecord.registration_date
-    };
+    try {
 
-    const current = this.getRegistrations();
-    current.unshift(newRecord);
-    this.saveRegistrations(current);
+      console.log(
+        "[Supabase] Submitting registration:",
+        supabaseRecord
+      );
 
-    sessionStorage.setItem(RATE_LIMIT_KEY, Date.now().toString());
-    return newRecord;
+      const {
+        data,
+        error
+      } = await supabase
+        .from("bangla_registrations")
+        .insert([supabaseRecord])
+        .select()
+        .single();
+
+      if (error) {
+
+        console.error(
+          "[Supabase Insert Error]:",
+          error
+        );
+
+        if (error.code === "23505") {
+          throw new Error(
+            "A registration with this Contact No or Email already exists."
+          );
+        }
+
+        throw new Error(
+          error.message ||
+          "Registration could not be submitted. Please try again."
+        );
+      }
+
+      console.log(
+        "[Supabase] Registration saved successfully:",
+        data
+      );
+
+      try {
+        sessionStorage.setItem(
+          RATE_LIMIT_KEY,
+          Date.now().toString()
+        );
+      } catch (e) {
+        // Ignore sessionStorage errors
+      }
+
+      const newRecord = {
+        referenceId: referenceId,
+        institutionClubName: institutionClubName,
+        representativeName: representativeName,
+        contactNo: contactNo,
+        email: email,
+        slots: String(slotsCount),
+        status: "Confirmed",
+        registrationDate: registrationDate
+      };
+
+      const registrations =
+        this.getRegistrations();
+
+      registrations.push(newRecord);
+
+      this.saveRegistrations(
+        registrations
+      );
+
+      return newRecord;
+
+    } catch (error) {
+
+      console.error(
+        "[Registration Service] Submission failed:",
+        error
+      );
+
+      throw error;
+    }
   }
 }
 
-window.registrationService = new RegistrationService();
+window.registrationService =
+  new RegistrationService();
