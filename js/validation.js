@@ -1,20 +1,24 @@
 /**
  * Form Validation and Input Handling for NSU PODIUM 2026
  * Organizer: NSUDC — North South University Debate Club
+ *
+ * Validates the 5 official registration fields:
+ * 1. Institution Full Name
+ * 2. Club Name
+ * 3. Number of Slots
+ * 4. Representative's Name
+ * 5. Representative's Contact No.
  */
 
 class FormValidator {
   constructor(formElement) {
     this.form = formElement;
     this.fields = {
-      fullName: this.form.querySelector('#fullName'),
-      studentId: this.form.querySelector('#studentId'),
-      department: this.form.querySelector('#department'),
-      batch: this.form.querySelector('#batch'),
-      email: this.form.querySelector('#email'),
-      phone: this.form.querySelector('#phone'),
-      eventPreference: this.form.querySelector('#eventPreference'),
-      terms: this.form.querySelector('#terms')
+      institutionName: this.form.querySelector('#institutionName'),
+      clubName: this.form.querySelector('#clubName'),
+      slots: this.form.querySelector('#slots'),
+      representativeName: this.form.querySelector('#representativeName'),
+      representativePhone: this.form.querySelector('#representativePhone')
     };
 
     this.initListeners();
@@ -32,24 +36,21 @@ class FormValidator {
       input.addEventListener('input', () => {
         this.clearFieldError(key);
       });
-
-      if (input.type === 'checkbox' || input.tagName === 'SELECT') {
-        input.addEventListener('change', () => {
-          this.validateField(key);
-        });
-      }
     });
 
     // Sanitizer for phone number
-    if (this.fields.phone) {
-      this.fields.phone.addEventListener('input', (e) => {
+    if (this.fields.representativePhone) {
+      this.fields.representativePhone.addEventListener('input', (e) => {
         e.target.value = e.target.value.replace(/[^\d+ \-()]/g, '');
       });
     }
-  }
 
-  isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    // Number sanitization for slots
+    if (this.fields.slots) {
+      this.fields.slots.addEventListener('input', (e) => {
+        e.target.value = e.target.value.replace(/[^\d]/g, '');
+      });
+    }
   }
 
   isValidPhone(phone) {
@@ -68,51 +69,34 @@ class FormValidator {
     let errorMsg = '';
 
     switch (key) {
-      case 'fullName':
+      case 'institutionName':
+        if (!value || value.length < 3) {
+          errorMsg = 'Please enter your institution full name (min 3 letters).';
+        }
+        break;
+
+      case 'clubName':
         if (!value || value.length < 2) {
-          errorMsg = 'Please enter your full name.';
+          errorMsg = 'Please enter your club or delegation name.';
         }
         break;
 
-      case 'studentId':
-        if (!value || value.length < 4) {
-          errorMsg = 'Please enter a valid Student ID number.';
+      case 'slots':
+        const slotsNum = parseInt(value, 10);
+        if (!value || isNaN(slotsNum) || slotsNum < 1 || slotsNum > 25) {
+          errorMsg = 'Enter requested slots (between 1 and 25).';
         }
         break;
 
-      case 'department':
-        if (!value) {
-          errorMsg = 'Please select or enter your academic department.';
+      case 'representativeName':
+        if (!value || value.length < 3) {
+          errorMsg = "Please enter representative's full name.";
         }
         break;
 
-      case 'batch':
-        if (!value) {
-          errorMsg = 'Please enter your academic batch (e.g. 212 or Spring 2022).';
-        }
-        break;
-
-      case 'email':
-        if (!value || !this.isValidEmail(value)) {
-          errorMsg = 'Please enter a valid institutional or personal email address.';
-        }
-        break;
-
-      case 'phone':
+      case 'representativePhone':
         if (!value || !this.isValidPhone(value)) {
-          errorMsg = 'Please enter a valid contact phone number.';
-        }
-        break;
-
-      case 'eventPreference':
-        if (!value) {
-          errorMsg = 'Please select your participation category.';
-        }
-        break;
-
-      case 'terms':
-        if (!el.checked) {
-          errorMsg = 'You must agree to the event guidelines and code of conduct.';
+          errorMsg = 'Please enter a valid representative contact number.';
         }
         break;
     }
@@ -129,7 +113,7 @@ class FormValidator {
   setFieldError(key, msg) {
     const el = this.fields[key];
     if (!el) return;
-    const group = el.closest('.form-group') || el.closest('.form-group-full');
+    const group = el.closest('.form-group');
     if (!group) return;
 
     group.classList.add('has-error');
@@ -142,7 +126,7 @@ class FormValidator {
   clearFieldError(key) {
     const el = this.fields[key];
     if (!el) return;
-    const group = el.closest('.form-group') || el.closest('.form-group-full');
+    const group = el.closest('.form-group');
     if (!group) return;
 
     group.classList.remove('has-error');

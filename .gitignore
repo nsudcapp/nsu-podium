@@ -3,3 +3,8 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+.env*.local
+*.local
+*key.txt
+*key.json
+supabase.txt

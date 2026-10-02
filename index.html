@@ -3,1148 +3,131 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>NSU PODIUM 2026 | NSUDC — North South University Debate Club</title>
-  <meta name="description" content="Official event website and registration platform for NSU PODIUM 2026, organized by NSUDC — North South University Debate Club. A platform for ideas. A stage for change.">
-  <meta name="theme-color" content="#1d4ed8">
-
-  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <title>NSU PODIUM 2026 | DEBATE. COMPETE. LEVEL UP.</title>
+  <meta name="description" content="Official NSU PODIUM 2026 Retro-Arcade Platform. Debate. Compete. Level Up. Organized by NSUDC — North South University Debate Club.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2300f0ff'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5z'/%3E%3Cpath d='M2 17l10 5 10-5' fill='%23facc15'/%3E%3Cpath d='M2 12l10 5 10-5' fill='%231e40ff'/%3E%3C/svg%3E">
+  
+  <!-- Google Fonts: Press Start 2P, Chakra Petch, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231d4ed8' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2L2 7l10 5 10-5-10-5z'/%3E%3Cpath d='M2 17l10 5 10-5'/%3E%3Cpath d='M2 12l10 5 10-5'/%3E%3C/svg%3E">
-
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-  <!-- =========================================================================
-       HEADER / NAVIGATION
-       ========================================================================= -->
-  <header class="site-header" id="siteHeader">
-    <div class="container nav-container">
-      <a href="#home" class="brand-link" aria-label="NSU PODIUM 2026 Home">
-        <div class="brand-crest" aria-hidden="true">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-            <path d="M2 17l10 5 10-5"></path>
-            <path d="M2 12l10 5 10-5"></path>
-          </svg>
-        </div>
-        <div class="brand-info">
-          <span class="brand-title">NSU PODIUM 2026</span>
-          <span class="brand-subtitle">NSUDC — North South University Debate Club</span>
-        </div>
+  <!-- Retro Grid & Dot Pattern Background -->
+  <div class="retro-grid-bg" aria-hidden="true"></div>
+
+  <div class="arcade-page-wrapper">
+
+    <!-- Top Brand Bar with Provided NSU PODIUM Logo -->
+    <header class="brand-marquee-header">
+      <a href="index.html" class="brand-marquee-logo-link" aria-label="NSU PODIUM 2026 Home">
+        <img
+          src="https://i.postimg.cc/C1Hty9d0/main-logo-(2).png"
+          alt="NSU PODIUM 2026 Logo"
+          class="brand-marquee-logo-img"
+          loading="eager"
+        >
       </a>
-
-      <!-- Desktop Nav -->
-      <nav class="desktop-nav" aria-label="Main Navigation">
-        <ul class="nav-links">
-          <li><a href="#home" class="nav-item-link active">Home</a></li>
-          <li><a href="#about" class="nav-item-link">About</a></li>
-          <li><a href="#highlights" class="nav-item-link">Highlights</a></li>
-          <li><a href="#events" class="nav-item-link">Program</a></li>
-          <li><a href="#timeline" class="nav-item-link">Timeline</a></li>
-          <li><a href="#register" class="nav-item-link">Registration</a></li>
-          <li><a href="#faq" class="nav-item-link">FAQ</a></li>
-          <li><a href="#contact" class="nav-item-link">Contact</a></li>
-        </ul>
-      </nav>
-
-      <!-- CTA & Mobile Trigger -->
-      <div class="header-actions">
-        <a href="#register" class="btn btn-primary" id="navRegisterBtn">
-          <span>Register Now</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </a>
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
+      <div class="brand-marquee-badge">
+        NSUDC • OFFICIAL
       </div>
-    </div>
+    </header>
 
-    <!-- Mobile Drawer -->
-    <div class="mobile-nav" id="mobileNav" aria-label="Mobile Navigation">
-      <ul class="nav-links">
-        <li><a href="#home" class="nav-item-link">Home</a></li>
-        <li><a href="#about" class="nav-item-link">About</a></li>
-        <li><a href="#highlights" class="nav-item-link">Highlights</a></li>
-        <li><a href="#events" class="nav-item-link">Program</a></li>
-        <li><a href="#timeline" class="nav-item-link">Timeline</a></li>
-        <li><a href="#register" class="nav-item-link">Registration</a></li>
-        <li><a href="#faq" class="nav-item-link">FAQ</a></li>
-        <li><a href="#contact" class="nav-item-link">Contact</a></li>
-      </ul>
-      <a href="#register" class="btn btn-primary btn-block">Register for Podium 2026</a>
-    </div>
-  </header>
+    <!-- Main Arcade Cabinet Screen (Matching Reference Image 1) -->
+    <main class="arcade-screen-container" id="arenaScreen">
 
-  <main id="mainContent">
+      <!-- 1. Top Arcade Status Bar: 1UP | HIGH SCORE | CREDIT 01 -->
+      <div class="arcade-status-bar">
+        <span class="status-item one-up">1UP</span>
+        <span class="status-item high-score">HIGH SCORE</span>
+        <span class="status-item credit">CREDIT 01</span>
+      </div>
 
-    <!-- =========================================================================
-         HERO SECTION
-         ========================================================================= -->
-    <section class="hero-section" id="home">
-      <div class="hero-grid-bg" aria-hidden="true"></div>
-      <div class="container hero-layout">
+      <!-- 2. Big 3D Pixel Title: NSU PODIUM -->
+      <div class="arcade-title-box">
+        <h1 class="arcade-main-title">NSU PODIUM</h1>
         
-        <!-- Left: Copy & CTAs -->
-        <div class="hero-content-col">
-          <div class="hero-badge">
-            <span class="hero-badge-pulse" aria-hidden="true"></span>
-            <span>Official Event Platform • NSU PODIUM 2026</span>
-          </div>
+        <!-- Subtitle: DEBATE. COMPETE. LEVEL UP. -->
+        <p class="arcade-tagline">
+          <span class="tagline-dot">•</span>
+          <span>DEBATE. COMPETE. LEVEL UP.</span>
+          <span class="tagline-dot">•</span>
+        </p>
+      </div>
 
-          <h1 class="hero-title">
-            NSU PODIUM <span class="title-accent">2026</span>
-          </h1>
-
-          <p class="hero-tagline">
-            “A platform for ideas. A stage for change.”
-          </p>
-
-          <p class="hero-description">
-            NSU PODIUM brings students together for discussion, debate, ideas, leadership and meaningful conversations, organized by NSUDC — North South University Debate Club.
-          </p>
-
-          <div class="hero-cta-group">
-            <a href="#register" class="btn btn-primary btn-lg">
-              <span>Register Now</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </a>
-            <a href="#about" class="btn btn-ghost-light btn-lg">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
-              </svg>
-              <span>Explore Event</span>
-            </a>
-          </div>
-
-          <!-- Metadata Ribbon with Verified Placeholders -->
-          <div class="hero-meta-bar">
-            <div class="meta-pill">
-              <div class="meta-pill-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              </div>
-              <div>
-                <div class="meta-pill-label">Event Date</div>
-                <div class="meta-pill-value">To Be Announced</div>
-              </div>
-            </div>
-
-            <div class="meta-pill">
-              <div class="meta-pill-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              </div>
-              <div>
-                <div class="meta-pill-label">Venue</div>
-                <div class="meta-pill-value">To Be Announced</div>
-              </div>
-            </div>
-
-            <div class="meta-pill">
-              <div class="meta-pill-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              </div>
-              <div>
-                <div class="meta-pill-label">Registration</div>
-                <div class="meta-pill-value">Available Now</div>
-              </div>
-            </div>
-
-            <div class="meta-pill">
-              <div class="meta-pill-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              </div>
-              <div>
-                <div class="meta-pill-label">Audience</div>
-                <div class="meta-pill-value">Students & Delegates</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right: Campus & Podium Visual Artwork -->
-        <div class="hero-visual-col">
-          <div class="hero-visual-card">
-            <svg class="hero-svg-frame" viewBox="0 0 540 380" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="North South University Campus and Podium Graphic">
-              <defs>
-                <linearGradient id="gradSky" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#0b1730" />
-                  <stop offset="100%" stop-color="#172e61" />
-                </linearGradient>
-                <linearGradient id="gradSpotlight" x1="50%" y1="0%" x2="50%" y2="100%">
-                  <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35" />
-                  <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.0" />
-                </linearGradient>
-                <linearGradient id="gradPodium" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#1e40af" />
-                  <stop offset="100%" stop-color="#0f172a" />
-                </linearGradient>
-              </defs>
-
-              <!-- Night Sky Backing -->
-              <rect width="540" height="380" rx="14" fill="url(#gradSky)" />
-
-              <!-- North South University Architectural Facade Silhouette -->
-              <path d="M30 250 L30 140 L110 140 L110 90 L210 90 L210 140 L330 140 L330 70 L430 70 L430 140 L510 140 L510 250 Z" fill="#0f1f42" opacity="0.6" />
-              <!-- Windows in campus structure -->
-              <g fill="#38bdf8" opacity="0.4">
-                <rect x="50" y="160" width="16" height="24" rx="2" />
-                <rect x="80" y="160" width="16" height="24" rx="2" />
-                <rect x="130" y="110" width="20" height="30" rx="2" />
-                <rect x="170" y="110" width="20" height="30" rx="2" />
-                <rect x="350" y="90" width="24" height="40" rx="2" />
-                <rect x="390" y="90" width="24" height="40" rx="2" />
-                <rect x="450" y="160" width="16" height="24" rx="2" />
-                <rect x="480" y="160" width="16" height="24" rx="2" />
-              </g>
-
-              <!-- Iconic NSU Glass Curved Atrium Outline -->
-              <path d="M190 250 C190 120, 350 120, 350 250 Z" fill="#1e3a8a" opacity="0.45" />
-              <path d="M220 250 C220 160, 320 160, 320 250 Z" fill="#0284c7" opacity="0.3" />
-
-              <!-- Spotlight Cone -->
-              <polygon points="270,30 150,290 390,290" fill="url(#gradSpotlight)" />
-
-              <!-- Stage Platform -->
-              <ellipse cx="270" cy="290" rx="190" ry="42" fill="#1e3a8a" opacity="0.8" />
-              <ellipse cx="270" cy="285" rx="170" ry="34" fill="#0f172a" />
-
-              <!-- Stage Floor Grid lines -->
-              <path d="M100 290 L440 290" stroke="#38bdf8" stroke-width="1.5" opacity="0.3" />
-              <path d="M130 280 L410 280" stroke="#38bdf8" stroke-width="1" opacity="0.2" />
-
-              <!-- Central NSU Debate Podium -->
-              <g transform="translate(235, 185)">
-                <!-- Podium Top Slant -->
-                <polygon points="5,20 65,20 60,32 10,32" fill="#3b82f6" />
-                <!-- Podium Pillar Base -->
-                <path d="M15 32 L20 95 L50 95 L55 32 Z" fill="url(#gradPodium)" stroke="#38bdf8" stroke-width="1" />
-                <!-- Podium Plinth -->
-                <rect x="12" y="95" width="46" height="8" rx="2" fill="#1d4ed8" />
-                <!-- Debate Microphone -->
-                <path d="M35 20 L35 4 C35 -2, 42 -2, 42 4" stroke="#e0f2fe" stroke-width="2.5" fill="none" stroke-linecap="round" />
-                <ellipse cx="43" cy="5" rx="3.5" ry="5.5" fill="#38bdf8" />
-                <!-- NSUDC Crest Emblem on Podium -->
-                <circle cx="35" cy="54" r="11" fill="#1d4ed8" stroke="#60a5fa" stroke-width="1.5" />
-                <path d="M35 48 L30 52 L35 56 L40 52 Z" fill="#ffffff" />
-                <path d="M30 56 L35 59 L40 56" stroke="#ffffff" stroke-width="1.2" fill="none" />
-              </g>
-
-              <!-- Sound waves / Rhetoric ripples -->
-              <path d="M295 190 C320 180, 320 215, 295 205" stroke="#38bdf8" stroke-width="2" fill="none" opacity="0.75" />
-              <path d="M308 184 C342 170, 342 225, 308 211" stroke="#38bdf8" stroke-width="1.8" fill="none" opacity="0.45" />
-
-              <!-- North South University Debate Club Tag Overlay -->
-              <rect x="175" y="325" width="190" height="28" rx="14" fill="#070d19" stroke="#38bdf8" stroke-width="1" />
-              <text x="270" y="343" fill="#ffffff" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" font-weight="700" text-anchor="middle" letter-spacing="0.5">NORTH SOUTH UNIVERSITY</text>
+      <!-- 3. Winners' Podium with 1, 2, 3 and Arcade Characters -->
+      <section class="arcade-podium-section" aria-label="Winners Podium">
+        
+        <!-- Step 2 (Left): Blue Pedestal with Cyan Ghost -->
+        <div class="podium-pillar step-2">
+          <div class="podium-character-wrap">
+            <svg class="arcade-ghost-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Cyan Ghost">
+              <!-- Ghost Body -->
+              <path d="M4 14C4 7.37 9.37 2 16 2C22.63 2 28 7.37 28 14V28L24 24L20 28L16 24L12 28L8 24L4 28V14Z" fill="#00f0ff"/>
+              <!-- Ghost White Eyes -->
+              <rect x="8" y="10" width="5" height="7" rx="1.5" fill="#ffffff"/>
+              <rect x="19" y="10" width="5" height="7" rx="1.5" fill="#ffffff"/>
+              <!-- Ghost Blue Pupils (Looking Right / Toward Center) -->
+              <rect x="11" y="12" width="3" height="4" fill="#0033aa"/>
+              <rect x="22" y="12" width="3" height="4" fill="#0033aa"/>
             </svg>
-
-            <!-- Floating Badge below composition with honest, non-fabricated attributes -->
-            <div class="hero-floating-badge">
-              <div class="hero-floating-stat">
-                <span class="floating-stat-num">Dialogue</span>
-                <span class="floating-stat-text">& Discussion</span>
-              </div>
-              <div style="width: 1px; height: 24px; background: rgba(255,255,255,0.15);" aria-hidden="true"></div>
-              <div class="hero-floating-stat">
-                <span class="floating-stat-num">Ideas</span>
-                <span class="floating-stat-text">& Leadership</span>
-              </div>
-              <div style="width: 1px; height: 24px; background: rgba(255,255,255,0.15);" aria-hidden="true"></div>
-              <div class="hero-floating-stat">
-                <span class="floating-stat-num">NSUDC</span>
-                <span class="floating-stat-text">Debate Club</span>
-              </div>
-            </div>
           </div>
+          <div class="podium-block">2</div>
         </div>
 
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         ABOUT SECTION
-         ========================================================================= -->
-    <section class="section-padding about-section" id="about">
-      <div class="container">
-        
-        <div class="section-header">
-          <span class="section-tag">About The Event</span>
-          <h2 class="section-title">A Platform for Ideas & Constructive Dialogue</h2>
-          <p class="section-subtitle">
-            NSU PODIUM 2026 is an official event organized by the North South University Debate Club (NSUDC).
-          </p>
-        </div>
-
-        <div class="about-grid">
-          <!-- Text Description -->
-          <div class="about-text">
-            <h3>Engaging Minds, Exchanging Perspectives</h3>
-            <p class="about-lead">
-              NSU PODIUM brings students together for discussion, debate, ideas, leadership and meaningful conversations.
-            </p>
-            <p class="about-desc">
-              Organized by NSUDC — North South University Debate Club, this platform encourages students to engage with diverse viewpoints, cultivate critical thinking, and build effective communication skills.
-            </p>
-            <p class="about-desc">
-              Through collaborative sessions, dialogue, and constructive exchange, participants explore contemporary topics while connecting with fellow students across the university community.
-            </p>
-            <a href="#events" class="btn btn-secondary" style="margin-top: var(--space-2);">
-              <span>View Program Details</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </a>
+        <!-- Step 1 (Center): Tall Gold Pedestal with Golden Orb -->
+        <div class="podium-pillar step-1">
+          <div class="podium-character-wrap">
+            <div class="gold-orb" aria-label="Gold Champion Orb"></div>
           </div>
+          <div class="podium-block">1</div>
+        </div>
 
-          <!-- 4 Non-fabricated Dimension Cards -->
-          <div class="about-stats-grid">
-            <div class="about-stat-card">
-              <div class="about-stat-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-              </div>
-              <h4 class="about-stat-title">Interdisciplinary</h4>
-              <p class="about-stat-desc">
-                Bringing together students across different academic departments and areas of study to share perspectives.
-              </p>
-            </div>
-
-            <div class="about-stat-card">
-              <div class="about-stat-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              </div>
-              <h4 class="about-stat-title">Student-Led</h4>
-              <p class="about-stat-desc">
-                Organized and coordinated by students of the North South University Debate Club (NSUDC).
-              </p>
-            </div>
-
-            <div class="about-stat-card">
-              <div class="about-stat-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              </div>
-              <h4 class="about-stat-title">Ideas & Dialogue</h4>
-              <p class="about-stat-desc">
-                Encouraging constructive discussion, reasoned argumentation, and thoughtful exchange of ideas.
-              </p>
-            </div>
-
-            <div class="about-stat-card">
-              <div class="about-stat-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-              </div>
-              <h4 class="about-stat-title">NSU Community</h4>
-              <p class="about-stat-desc">
-                Connected with North South University and its active student leadership community.
-              </p>
-            </div>
+        <!-- Step 3 (Right): Purple/Pink Pedestal with Pink Ghost -->
+        <div class="podium-pillar step-3">
+          <div class="podium-character-wrap">
+            <svg class="arcade-ghost-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Pink Ghost">
+              <!-- Ghost Body -->
+              <path d="M4 14C4 7.37 9.37 2 16 2C22.63 2 28 7.37 28 14V28L24 24L20 28L16 24L12 28L8 24L4 28V14Z" fill="#f472b6"/>
+              <!-- Ghost White Eyes -->
+              <rect x="8" y="10" width="5" height="7" rx="1.5" fill="#ffffff"/>
+              <rect x="19" y="10" width="5" height="7" rx="1.5" fill="#ffffff"/>
+              <!-- Ghost Pupils (Looking Left / Toward Center) -->
+              <rect x="9" y="12" width="3" height="4" fill="#880055"/>
+              <rect x="20" y="12" width="3" height="4" fill="#880055"/>
+            </svg>
           </div>
+          <div class="podium-block">3</div>
         </div>
 
-      </div>
-    </section>
+      </section>
 
-    <!-- =========================================================================
-         EVENT HIGHLIGHTS (6 CARDS)
-         ========================================================================= -->
-    <section class="section-padding highlights-section" id="highlights">
-      <div class="container">
-        
-        <div class="section-header">
-          <span class="section-tag section-tag-cyan">Key Dimensions</span>
-          <h2 class="section-title">Core Focus Areas</h2>
-          <p class="section-subtitle">
-            Essential dimensions of discourse, leadership, and student exchange at NSU PODIUM.
-          </p>
-        </div>
-
-        <div class="highlights-grid">
-          <!-- 1. Inspiring Discussions -->
-          <article class="highlight-card">
-            <div class="highlight-icon-box" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            </div>
-            <h3 class="highlight-card-title">Inspiring Discussions</h3>
-            <p class="highlight-card-desc">
-              Thought-provoking dialogues addressing meaningful topics and encouraging diverse student viewpoints.
-            </p>
-          </article>
-
-          <!-- 2. Diverse Participation -->
-          <article class="highlight-card">
-            <div class="highlight-icon-box" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            </div>
-            <h3 class="highlight-card-title">Diverse Participation</h3>
-            <p class="highlight-card-desc">
-              Engaging participants from various academic fields and student backgrounds to share their perspectives.
-            </p>
-          </article>
-
-          <!-- 3. Critical Thinking -->
-          <article class="highlight-card">
-            <div class="highlight-icon-box" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            </div>
-            <h3 class="highlight-card-title">Critical Thinking</h3>
-            <p class="highlight-card-desc">
-              Fostering analytical reasoning, structured debate arguments, and evidence-based perspectives.
-            </p>
-          </article>
-
-          <!-- 4. Public Speaking -->
-          <article class="highlight-card">
-            <div class="highlight-icon-box" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
-            </div>
-            <h3 class="highlight-card-title">Public Speaking</h3>
-            <p class="highlight-card-desc">
-              Developing articulation, stage presence, speech structuring, and confidence before an audience.
-            </p>
-          </article>
-
-          <!-- 5. Leadership & Communication -->
-          <article class="highlight-card">
-            <div class="highlight-icon-box" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
-            <h3 class="highlight-card-title">Leadership & Communication</h3>
-            <p class="highlight-card-desc">
-              Strengthening interpersonal dialogue, collaborative listening, and shared leadership practices.
-            </p>
-          </article>
-
-          <!-- 6. Growth & Perspective -->
-          <article class="highlight-card">
-            <div class="highlight-icon-box" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-            </div>
-            <h3 class="highlight-card-title">Growth & Perspective</h3>
-            <p class="highlight-card-desc">
-              Gaining new insights, expanding personal horizons, and building connections with peers.
-            </p>
-          </article>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         EVENTS / PROGRAM TRACKS SECTION (NEUTRAL PLACEHOLDERS)
-         ========================================================================= -->
-    <section class="section-padding tracks-section" id="events">
-      <div class="container">
-        
-        <div class="section-header">
-          <span class="section-tag">Program Details</span>
-          <h2 class="section-title">Event Information</h2>
-          <p class="section-subtitle">
-            Overview of event areas. Specific program details and schedules will be announced prior to the event.
-          </p>
-        </div>
-
-        <div class="tracks-grid">
-          <!-- Session 1: Debate & Discussion -->
-          <article class="track-card">
-            <div class="track-card-header">
-              <span class="track-badge">Coming Soon</span>
-              <span style="font-size: 0.8125rem; font-weight: 700; color: var(--color-text-muted);">Session 01</span>
-            </div>
-            <div class="track-card-body">
-              <h3 class="track-title">Debate & Discussion</h3>
-              <p class="track-desc">
-                Structured debate rounds and topic-focused discussions centered on contemporary student and social themes.
-              </p>
-              <ul class="track-meta-list">
-                <li class="track-meta-item">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Category: Discussion Session</span>
-                </li>
-                <li class="track-meta-item">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Schedule: To Be Announced</span>
-                </li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- Session 2: Public Speaking -->
-          <article class="track-card">
-            <div class="track-card-header">
-              <span class="track-badge track-badge-accent">Coming Soon</span>
-              <span style="font-size: 0.8125rem; font-weight: 700; color: var(--color-text-muted);">Session 02</span>
-            </div>
-            <div class="track-card-body">
-              <h3 class="track-title">Public Speaking & Speech</h3>
-              <p class="track-desc">
-                Sessions highlighting articulate delivery, speech structuring, reasoned viewpoints, and rhetoric.
-              </p>
-              <ul class="track-meta-list">
-                <li class="track-meta-item">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Category: Speech Session</span>
-                </li>
-                <li class="track-meta-item">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Schedule: To Be Announced</span>
-                </li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- Session 3: Panel Discussions -->
-          <article class="track-card">
-            <div class="track-card-header">
-              <span class="track-badge">Coming Soon</span>
-              <span style="font-size: 0.8125rem; font-weight: 700; color: var(--color-text-muted);">Session 03</span>
-            </div>
-            <div class="track-card-body">
-              <h3 class="track-title">Panel Discussions</h3>
-              <p class="track-desc">
-                Interactive discussions exploring diverse ideas, leadership concepts, and student perspectives.
-              </p>
-              <ul class="track-meta-list">
-                <li class="track-meta-item">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Category: Panel Session</span>
-                </li>
-                <li class="track-meta-item">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Schedule: To Be Announced</span>
-                </li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- Session 4: Leadership & Communication -->
-          <article class="track-card">
-            <div class="track-card-header">
-              <span class="track-badge track-badge-accent">Coming Soon</span>
-              <span style="font-size: 0.8125rem; font-weight: 700; color: var(--color-text-muted);">Session 04</span>
-            </div>
-            <div class="track-card-body">
-              <h3 class="track-title">Leadership & Communication</h3>
-              <p class="track-desc">
-                Sessions focused on leadership dialogue, communication strategies, and collaborative peer learning.
-              </p>
-              <ul class="track-meta-list">
-                <li class="track-meta-item">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Category: Interactive Workshop</span>
-                </li>
-                <li class="track-meta-item">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Schedule: To Be Announced</span>
-                </li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- Session 5: Interactive Sessions -->
-          <article class="track-card">
-            <div class="track-card-header">
-              <span class="track-badge">Coming Soon</span>
-              <span style="font-size: 0.8125rem; font-weight: 700; color: var(--color-text-muted);">Session 05</span>
-            </div>
-            <div class="track-card-body">
-              <h3 class="track-title">Interactive Sessions</h3>
-              <p class="track-desc">
-                Collaborative student sessions designed to encourage open dialogue, idea-sharing, and networking.
-              </p>
-              <ul class="track-meta-list">
-                <li class="track-meta-item">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Category: Student Forum</span>
-                </li>
-                <li class="track-meta-item">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Schedule: To Be Announced</span>
-                </li>
-              </ul>
-            </div>
-          </article>
-
-          <!-- Session 6: Concluding Session -->
-          <article class="track-card">
-            <div class="track-card-header">
-              <span class="track-badge">Coming Soon</span>
-              <span style="font-size: 0.8125rem; font-weight: 700; color: var(--color-text-muted);">Session 06</span>
-            </div>
-            <div class="track-card-body">
-              <h3 class="track-title">Concluding Session</h3>
-              <p class="track-desc">
-                Final session bringing participants together for closing reflections and event wrap-up.
-              </p>
-              <ul class="track-meta-list">
-                <li class="track-meta-item">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Category: Closing Remarks</span>
-                </li>
-                <li class="track-meta-item">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Schedule: To Be Announced</span>
-                </li>
-              </ul>
-            </div>
-          </article>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         EVENT TIMELINE SECTION (CLEAN & NON-FABRICATED)
-         ========================================================================= -->
-    <section class="section-padding timeline-section" id="timeline">
-      <div class="container">
-        
-        <div class="section-header">
-          <span class="section-tag section-tag-cyan">Event Roadmap</span>
-          <h2 class="section-title">Event Timeline</h2>
-          <p class="section-subtitle">
-            Key stages of NSU PODIUM 2026. Detailed schedules will be announced prior to the event.
-          </p>
-        </div>
-
-        <div class="timeline-container">
-          <!-- Step 1 -->
-          <div class="timeline-step">
-            <div class="timeline-node" aria-hidden="true">01</div>
-            <div class="timeline-card">
-              <div class="timeline-phase">Stage 01</div>
-              <h3 class="timeline-title">Registration Opens</h3>
-              <p class="timeline-desc">
-                Online delegate and participant registration opens through the official portal.
-              </p>
-            </div>
-          </div>
-
-          <!-- Step 2 -->
-          <div class="timeline-step">
-            <div class="timeline-node" aria-hidden="true">02</div>
-            <div class="timeline-card">
-              <div class="timeline-phase">Stage 02</div>
-              <h3 class="timeline-title">Program Schedule Announcement</h3>
-              <p class="timeline-desc">
-                Detailed session timings, topic outlines, and event guidelines will be announced by the organizers.
-              </p>
-            </div>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="timeline-step">
-            <div class="timeline-node" aria-hidden="true">03</div>
-            <div class="timeline-card">
-              <div class="timeline-phase">Stage 03</div>
-              <h3 class="timeline-title">Event Sessions & Activities</h3>
-              <p class="timeline-desc">
-                Debate, public speech, panel discussions, and interactive sessions take place as scheduled.
-              </p>
-            </div>
-          </div>
-
-          <!-- Step 4 -->
-          <div class="timeline-step">
-            <div class="timeline-node" aria-hidden="true">04</div>
-            <div class="timeline-card">
-              <div class="timeline-phase">Stage 04</div>
-              <h3 class="timeline-title">Concluding Session</h3>
-              <p class="timeline-desc">
-                Closing reflections, participant acknowledgment, and official wrap-up of the event.
-              </p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         REGISTRATION SECTION
-         ========================================================================= -->
-    <section class="section-padding registration-section" id="register">
-      <div class="container">
-        
-        <div class="section-header">
-          <span class="section-tag">Registration</span>
-          <h2 class="section-title">Event Registration</h2>
-          <p class="section-subtitle">
-            Complete the form below to register your participation for NSU PODIUM 2026.
-          </p>
-        </div>
-
-        <div class="registration-wrapper">
-          <div class="registration-card" id="registrationCard">
-            
-            <!-- Card Header -->
-            <div class="registration-card-header">
-              <div class="reg-header-text">
-                <h3>Delegate Registration Form</h3>
-                <p>Official registration for NSU PODIUM 2026, organized by NSUDC</p>
-              </div>
-              <div class="reg-live-pill">
-                <span class="reg-live-dot" aria-hidden="true"></span>
-                <span>Registration Open</span>
-              </div>
-            </div>
-
-            <!-- Card Body -->
-            <div class="registration-card-body">
-              
-              <!-- Global Alert Banner -->
-              <div id="formGlobalAlert" class="global-alert global-alert-error" style="display: none;" role="alert">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                <span id="formGlobalAlertText"></span>
-              </div>
-
-              <!-- Form -->
-              <form id="podiumRegistrationForm" novalidate>
-                <div class="form-grid">
-                  
-                  <!-- 1. Full Name -->
-                  <div class="form-group">
-                    <label for="fullName" class="form-label">
-                      Full Name <span class="required-mark" aria-hidden="true">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="fullName"
-                      name="fullName"
-                      class="form-control"
-                      placeholder="Enter your full name"
-                      required
-                      aria-required="true"
-                      autocomplete="name"
-                    >
-                    <div class="error-message">
-                      <span class="error-message-text"></span>
-                    </div>
-                  </div>
-
-                  <!-- 2. Student ID -->
-                  <div class="form-group">
-                    <label for="studentId" class="form-label">
-                      Student ID <span class="required-mark" aria-hidden="true">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="studentId"
-                      name="studentId"
-                      class="form-control"
-                      placeholder="Enter your student ID"
-                      required
-                      aria-required="true"
-                    >
-                    <div class="error-message">
-                      <span class="error-message-text"></span>
-                    </div>
-                  </div>
-
-                  <!-- 3. Department -->
-                  <div class="form-group">
-                    <label for="department" class="form-label">
-                      Department <span class="required-mark" aria-hidden="true">*</span>
-                    </label>
-                    <select id="department" name="department" class="form-control" required aria-required="true">
-                      <option value="" disabled selected>Select Department</option>
-                      <option value="Department of Electrical & Computer Engineering (ECE)">Department of Electrical & Computer Engineering (ECE)</option>
-                      <option value="School of Business & Economics (SBE)">School of Business & Economics (SBE)</option>
-                      <option value="Department of English & Modern Languages (DEML)">Department of English & Modern Languages (DEML)</option>
-                      <option value="Department of Law">Department of Law</option>
-                      <option value="Department of Civil & Environmental Engineering (CEE)">Department of Civil & Environmental Engineering (CEE)</option>
-                      <option value="Department of Biochemistry & Microbiology">Department of Biochemistry & Microbiology</option>
-                      <option value="Department of Pharmacy">Department of Pharmacy</option>
-                      <option value="Department of Economics">Department of Economics</option>
-                      <option value="Other Department">Other Department</option>
-                    </select>
-                    <div class="error-message">
-                      <span class="error-message-text"></span>
-                    </div>
-                  </div>
-
-                  <!-- 4. Batch -->
-                  <div class="form-group">
-                    <label for="batch" class="form-label">
-                      Batch <span class="required-mark" aria-hidden="true">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="batch"
-                      name="batch"
-                      class="form-control"
-                      placeholder="e.g., 212 or Spring 2022"
-                      required
-                      aria-required="true"
-                    >
-                    <div class="error-message">
-                      <span class="error-message-text"></span>
-                    </div>
-                  </div>
-
-                  <!-- 5. Email Address -->
-                  <div class="form-group">
-                    <label for="email" class="form-label">
-                      Email Address <span class="required-mark" aria-hidden="true">*</span>
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      class="form-control"
-                      placeholder="Enter your email address"
-                      required
-                      aria-required="true"
-                      autocomplete="email"
-                    >
-                    <div class="error-message">
-                      <span class="error-message-text"></span>
-                    </div>
-                  </div>
-
-                  <!-- 6. Phone Number -->
-                  <div class="form-group">
-                    <label for="phone" class="form-label">
-                      Phone Number <span class="required-mark" aria-hidden="true">*</span>
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      class="form-control"
-                      placeholder="Enter contact number"
-                      required
-                      aria-required="true"
-                      autocomplete="tel"
-                    >
-                    <div class="error-message">
-                      <span class="error-message-text"></span>
-                    </div>
-                  </div>
-
-                  <!-- 7. Event Preference -->
-                  <div class="form-group form-group-full">
-                    <label for="eventPreference" class="form-label">
-                      Participation Category <span class="required-mark" aria-hidden="true">*</span>
-                    </label>
-                    <select id="eventPreference" name="eventPreference" class="form-control" required aria-required="true">
-                      <option value="" disabled selected>Select Participation Category</option>
-                      <option value="General Participant">General Participant</option>
-                      <option value="Discussion & Debate">Discussion & Debate</option>
-                      <option value="Public Speaking">Public Speaking</option>
-                      <option value="Observer">Observer</option>
-                    </select>
-                    <div class="error-message">
-                      <span class="error-message-text"></span>
-                    </div>
-                  </div>
-
-                  <!-- 8. Terms and Conditions -->
-                  <div class="form-group form-group-full">
-                    <label class="checkbox-container">
-                      <input type="checkbox" id="terms" name="terms" required aria-required="true">
-                      <span class="checkbox-label">
-                        I agree to abide by the event guidelines and code of conduct.
-                      </span>
-                    </label>
-                    <div class="error-message">
-                      <span class="error-message-text"></span>
-                    </div>
-                  </div>
-
-                </div>
-
-                <!-- Submit Button -->
-                <div>
-                  <button type="submit" id="submitBtn" class="btn btn-primary btn-block btn-lg">
-                    <span id="submitSpinner" class="spinner" style="display: none;" aria-hidden="true"></span>
-                    <span id="submitBtnText">Submit Registration</span>
-                  </button>
-                </div>
-              </form>
-
-              <!-- SUCCESS STATE -->
-              <div id="successCard" class="success-state" role="region" aria-live="polite">
-                <div class="success-badge" aria-hidden="true">
-                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                </div>
-
-                <h3 class="success-title">Registration Successful!</h3>
-                <p class="success-subtitle">
-                  Your registration for <strong>NSU PODIUM 2026</strong>, organized by NSUDC — North South University Debate Club, has been received.
-                </p>
-
-                <!-- Official Reference ID Badge -->
-                <div class="reference-box">
-                  <div class="reference-label">Official Reference ID</div>
-                  <div class="reference-id" id="refIdDisplay">PODIUM-2026-XXXXX</div>
-                  <button type="button" class="copy-btn" id="copyRefBtn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                    Copy Reference ID
-                  </button>
-                </div>
-
-                <!-- Registration Summary Receipt -->
-                <table class="receipt-table" aria-label="Registration Summary">
-                  <tbody>
-                    <tr>
-                      <th scope="row">Participant Name</th>
-                      <td id="receiptName">—</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Student ID</th>
-                      <td id="receiptId">—</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Department</th>
-                      <td id="receiptDept">—</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Category</th>
-                      <td id="receiptTrack">—</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                <button type="button" class="btn btn-secondary" id="newRegistrationBtn">
-                  <span>Register Another Participant</span>
-                </button>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         FAQ SECTION
-         ========================================================================= -->
-    <section class="section-padding faq-section" id="faq">
-      <div class="container">
-        
-        <div class="section-header">
-          <span class="section-tag section-tag-cyan">Support & Information</span>
-          <h2 class="section-title">Frequently Asked Questions</h2>
-          <p class="section-subtitle">
-            Find answers to common questions regarding participation and event updates.
-          </p>
-        </div>
-
-        <div class="faq-list">
-          <!-- FAQ 1 -->
-          <div class="faq-item active">
-            <button class="faq-question-btn" type="button">
-              <span>Who can register for NSU PODIUM 2026?</span>
-              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="faq-answer">
-              NSU PODIUM 2026 is an event organized by NSUDC — North South University Debate Club. Students interested in debate, leadership, ideas, and constructive discussion are invited to register.
-            </div>
-          </div>
-
-          <!-- FAQ 2 -->
-          <div class="faq-item">
-            <button class="faq-question-btn" type="button">
-              <span>How will I know my registration is received?</span>
-              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="faq-answer">
-              Upon submitting the registration form, you will receive an official Reference ID on screen. Please save this Reference ID for your records.
-            </div>
-          </div>
-
-          <!-- FAQ 3 -->
-          <div class="faq-item">
-            <button class="faq-question-btn" type="button">
-              <span>When will the schedule and venue details be announced?</span>
-              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="faq-answer">
-              Official event dates, venue details, and full program schedules will be announced prior to the event.
-            </div>
-          </div>
-
-          <!-- FAQ 4 -->
-          <div class="faq-item">
-            <button class="faq-question-btn" type="button">
-              <span>Can I update my registration details later?</span>
-              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="faq-answer">
-              If you need to update any submitted information, please reach out to the organizers with your assigned Reference ID.
-            </div>
-          </div>
-
-          <!-- FAQ 5 -->
-          <div class="faq-item">
-            <button class="faq-question-btn" type="button">
-              <span>Where can I find further event updates?</span>
-              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <div class="faq-answer">
-              Official updates, program announcements, and information will be shared through NSUDC — North South University Debate Club announcements.
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         CONTACT SECTION (VERIFIED INFO ONLY)
-         ========================================================================= -->
-    <section class="section-padding contact-section" id="contact">
-      <div class="container">
-        
-        <div class="section-header">
-          <span class="section-tag">Get in Touch</span>
-          <h2 class="section-title">Organizer Information</h2>
-          <p class="section-subtitle">
-            Contact information for NSUDC — North South University Debate Club.
-          </p>
-        </div>
-
-        <div class="contact-grid">
-          <!-- Location -->
-          <div class="contact-card">
-            <div class="contact-icon-box" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            </div>
-            <h3 class="contact-card-title">Campus Location</h3>
-            <p class="contact-card-detail">
-              North South University<br>
-              Plot 15, Block B, Bashundhara R/A<br>
-              Dhaka-1229, Bangladesh
-            </p>
-          </div>
-
-          <!-- Email -->
-          <div class="contact-card">
-            <div class="contact-icon-box" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            </div>
-            <h3 class="contact-card-title">Email</h3>
-            <p class="contact-card-detail">
-              info@nsudc.org<br>
-              Official Organizer Email
-            </p>
-          </div>
-
-          <!-- Phone -->
-          <div class="contact-card">
-            <div class="contact-icon-box" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            </div>
-            <h3 class="contact-card-title">Telephone</h3>
-            <p class="contact-card-detail">
-              +880 (2) 5566-8200<br>
-              North South University PABX
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- =========================================================================
-       FOOTER
-       ========================================================================= -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        
-        <!-- Brand & Mission -->
-        <div>
-          <div class="brand-link" style="margin-bottom: var(--space-4);">
-            <div class="brand-crest" style="background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.25);">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            </div>
-            <span class="footer-brand-title">NSU PODIUM 2026</span>
-          </div>
-          <p class="footer-desc">
-            An official event platform organized by NSUDC — North South University Debate Club.
-          </p>
-          <div class="footer-badge-pill">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            <span>NSUDC — North South University Debate Club</span>
-          </div>
-        </div>
-
-        <!-- Quick Navigation -->
-        <div>
-          <h4 class="footer-heading">Navigation</h4>
-          <ul class="footer-links">
-            <li><a href="#home" class="footer-link">Home</a></li>
-            <li><a href="#about" class="footer-link">About</a></li>
-            <li><a href="#highlights" class="footer-link">Highlights</a></li>
-            <li><a href="#events" class="footer-link">Program</a></li>
-            <li><a href="#timeline" class="footer-link">Timeline</a></li>
-          </ul>
-        </div>
-
-        <!-- Participation Links -->
-        <div>
-          <h4 class="footer-heading">Participation</h4>
-          <ul class="footer-links">
-            <li><a href="#register" class="footer-link">Registration</a></li>
-            <li><a href="#faq" class="footer-link">FAQ</a></li>
-            <li><a href="#contact" class="footer-link">Contact</a></li>
-          </ul>
-        </div>
-
-        <!-- Institutional Details -->
-        <div>
-          <h4 class="footer-heading">Host Institution</h4>
-          <p style="font-size: 0.9rem; line-height: 1.6; color: #94a3b8; margin-bottom: var(--space-3);">
-            North South University<br>
-            Plot 15, Block B, Bashundhara R/A<br>
-            Dhaka-1229, Bangladesh
-          </p>
-        </div>
-
+      <!-- 4. Bright Yellow Button: Register now (Navigates to Page 2) -->
+      <div>
+        <a href="register.html" class="arcade-btn-yellow" id="registerNowBtn">
+          Register now
+        </a>
       </div>
 
-      <!-- Bottom Bar -->
-      <div class="footer-bottom">
-        <div>
-          &copy; 2026 NSU PODIUM. Organized by NSUDC — North South University Debate Club. All rights reserved.
-        </div>
-        <div style="display: flex; gap: var(--space-4);">
-          <span>Bashundhara R/A, Dhaka</span>
-          <span>•</span>
-          <span>Official Event Platform</span>
-        </div>
-      </div>
-    </div>
-  </footer>
+    </main>
+
+    <!-- Footer -->
+    <footer class="arcade-page-footer">
+      <p class="arcade-footer-text">
+        &copy; 2026 NSU PODIUM • NSUDC — North South University Debate Club
+      </p>
+    </footer>
+
+  </div>
 
   <!-- Scripts -->
-  <script src="/js/storage.js"></script>
-  <script src="/js/validation.js"></script>
-  <script src="/js/app.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

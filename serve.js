@@ -20,7 +20,12 @@ const server = http.createServer((req, res) => {
 
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {
-      filePath = path.join(__dirname, 'index.html');
+      const htmlCandidate = filePath + '.html';
+      if (fs.existsSync(htmlCandidate)) {
+        filePath = htmlCandidate;
+      } else {
+        filePath = path.join(__dirname, 'index.html');
+      }
     }
 
     const ext = path.extname(filePath);

@@ -1,201 +1,223 @@
 /**
- * Main Application Controller for NSU PODIUM 2026
+ * Main Application Controller for NSU PODIUM 2026 (WEBSITE 1)
  * Organizer: NSUDC — North South University Debate Club
+ * Handles Page 1 interactions and Page 2 Team Registration (Bangla) Form
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // DOM Elements
-  const form = document.getElementById('podiumRegistrationForm');
-  const formCard = document.getElementById('registrationCard');
-  const successCard = document.getElementById('successCard');
-  const submitBtn = document.getElementById('submitBtn');
-  const submitBtnText = document.getElementById('submitBtnText');
-  const submitSpinner = document.getElementById('submitSpinner');
-  const formGlobalAlert = document.getElementById('formGlobalAlert');
-  const formGlobalAlertText = document.getElementById('formGlobalAlertText');
-
-  // Success Card Elements
-  const refIdDisplay = document.getElementById('refIdDisplay');
-  const copyRefBtn = document.getElementById('copyRefBtn');
-  const newRegistrationBtn = document.getElementById('newRegistrationBtn');
-  const receiptName = document.getElementById('receiptName');
-  const receiptId = document.getElementById('receiptId');
-  const receiptDept = document.getElementById('receiptDept');
-  const receiptTrack = document.getElementById('receiptTrack');
-
-  // Navigation
-  const siteHeader = document.getElementById('siteHeader');
-  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-  const mobileNav = document.getElementById('mobileNav');
-  const navLinks = document.querySelectorAll('.nav-item-link');
-
-  // Initialize Validator
-  let validator = null;
-  if (form) {
-    validator = new FormValidator(form);
-  }
-
   // =========================================================================
-  // SUBMISSION CONTROLLER
+  // PAGE 2: TEAM REGISTRATION (BANGLA) FORM CONTROLLER
   // =========================================================================
-  function setSubmitLoading(isLoading) {
-    if (isLoading) {
-      submitBtn.disabled = true;
-      if (submitSpinner) submitSpinner.style.display = 'inline-block';
-      if (submitBtnText) submitBtnText.textContent = 'Processing Registration...';
-      if (formGlobalAlert) formGlobalAlert.style.display = 'none';
-    } else {
-      submitBtn.disabled = false;
-      if (submitSpinner) submitSpinner.style.display = 'none';
-      if (submitBtnText) submitBtnText.textContent = 'Submit Registration';
-    }
-  }
+  const p2Form = document.getElementById('banglaRegistrationForm');
+  const p2SuccessCard = document.getElementById('p2SuccessCard');
+  const registerSubmitBtn = document.getElementById('registerSubmitBtn');
+  const registerAnotherBtn = document.getElementById('registerAnotherBtn');
 
-  function showGlobalAlert(message) {
-    if (formGlobalAlertText) formGlobalAlertText.textContent = message;
-    if (formGlobalAlert) formGlobalAlert.style.display = 'flex';
-  }
+  if (p2Form) {
+    const fields = {
+      institutionClubName: document.getElementById('institutionClubName'),
+      representativeName: document.getElementById('representativeName'),
+      contactNo: document.getElementById('contactNo'),
+      email: document.getElementById('email'),
+      slots: document.getElementById('slots')
+    };
 
-  if (form) {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    const errors = {
+      institutionClubName: document.getElementById('institutionClubNameError'),
+      representativeName: document.getElementById('representativeNameError'),
+      contactNo: document.getElementById('contactNoError'),
+      email: document.getElementById('emailError'),
+      slots: document.getElementById('slotsError')
+    };
 
-      if (!validator.validateAll()) return;
+    // Valid Slot Options (Strictly 1, 2, 3, or 4 as Required)
+    const VALID_SLOTS = ['1', '2', '3', '4'];
 
-      const payload = {
-        fullName: document.getElementById('fullName').value,
-        studentId: document.getElementById('studentId').value,
-        department: document.getElementById('department').value,
-        batch: document.getElementById('batch').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        eventPreference: document.getElementById('eventPreference').value
+    // Real-time error clearing when user types or selects
+    Object.keys(fields).forEach(key => {
+      const field = fields[key];
+      const errorEl = errors[key];
+      if (!field) return;
+
+      const clearError = () => {
+        field.classList.remove('has-error');
+        if (errorEl) errorEl.classList.remove('active');
       };
 
-      setSubmitLoading(true);
+      field.addEventListener('input', clearError);
+      field.addEventListener('change', clearError);
+      field.addEventListener('blur', () => {
+        if (field.value.trim() !== '') {
+          validateField(key);
+        }
+      });
+    });
+
+    // Validate a single field
+    function validateField(key) {
+      const field = fields[key];
+      const errorEl = errors[key];
+      if (!field) return true;
+
+      const val = (field.value || '').trim();
+      let isValid = true;
+      let errorMsg = '';
+
+      switch (key) {
+        case 'institutionClubName':
+          if (!val || val.length < 2) {
+            isValid = false;
+            errorMsg = 'Institution/Club Name is required.';
+          }
+          break;
+
+        case 'representativeName':
+          if (!val || val.length < 2) {
+            isValid = false;
+            errorMsg = 'Representative Name is required.';
+          }
+          break;
+
+        case 'contactNo':
+          const cleanPhone = val.replace(/[\s\-\(\)]/g, '');
+          if (!cleanPhone || cleanPhone.length < 8) {
+            isValid = false;
+            errorMsg = 'Valid Contact No is required.';
+          }
+          break;
+
+        case 'email':
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!val || !emailRegex.test(val)) {
+            isValid = false;
+            errorMsg = 'Valid email is required.';
+          }
+          break;
+
+        case 'slots':
+          // Matching Reference Image 2: "Choose number of slots (1-4)."
+          if (!val || !VALID_SLOTS.includes(val)) {
+            isValid = false;
+            errorMsg = 'Choose number of slots (1-4).';
+          }
+          break;
+      }
+
+      if (!isValid) {
+        field.classList.add('has-error');
+        if (errorEl) {
+          errorEl.textContent = errorMsg;
+          errorEl.classList.add('active');
+        }
+      } else {
+        field.classList.remove('has-error');
+        if (errorEl) errorEl.classList.remove('active');
+      }
+
+      return isValid;
+    }
+
+    // Validate all fields on submit
+    function validateAll() {
+      let allValid = true;
+      let firstInvalid = null;
+
+      Object.keys(fields).forEach(key => {
+        const valid = validateField(key);
+        if (!valid) {
+          allValid = false;
+          if (!firstInvalid && fields[key]) {
+            firstInvalid = fields[key];
+          }
+        }
+      });
+
+      if (firstInvalid) {
+        firstInvalid.focus();
+      }
+
+      return allValid;
+    }
+
+    // Form Submission
+    p2Form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (!validateAll()) return;
+
+      const payload = {
+        institutionClubName: fields.institutionClubName.value.trim(),
+        representativeName: fields.representativeName.value.trim(),
+        contactNo: fields.contactNo.value.trim(),
+        email: fields.email.value.trim(),
+        slots: fields.slots.value.trim()
+      };
+
+      if (registerSubmitBtn) {
+        registerSubmitBtn.disabled = true;
+        registerSubmitBtn.textContent = 'Registering...';
+      }
 
       try {
-        const record = await window.registrationService.submitRegistration(payload);
+        const result = await window.registrationService.submitRegistration(payload);
 
-        // Populate receipt
-        if (refIdDisplay) refIdDisplay.textContent = record.referenceId;
-        if (receiptName) receiptName.textContent = record.fullName;
-        if (receiptId) receiptId.textContent = record.studentId;
-        if (receiptDept) receiptDept.textContent = record.department;
-        if (receiptTrack) receiptTrack.textContent = record.eventPreference;
+        // Populate receipt fields
+        const receiptRefId = document.getElementById('receiptRefId');
+        const receiptInstClub = document.getElementById('receiptInstClub');
+        const receiptRepName = document.getElementById('receiptRepName');
+        const receiptContactNo = document.getElementById('receiptContactNo');
+        const receiptEmail = document.getElementById('receiptEmail');
+        const receiptSlots = document.getElementById('receiptSlots');
 
-        // Switch to success card
-        form.style.display = 'none';
-        if (successCard) {
-          successCard.classList.add('active');
-          successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (receiptRefId) receiptRefId.textContent = result.referenceId;
+        if (receiptInstClub) receiptInstClub.textContent = result.institutionClubName;
+        if (receiptRepName) receiptRepName.textContent = result.representativeName;
+        if (receiptContactNo) receiptContactNo.textContent = result.contactNo;
+        if (receiptEmail) receiptEmail.textContent = result.email;
+        if (receiptSlots) receiptSlots.textContent = `${result.slots} Slot(s)`;
+
+        // Switch to receipt view
+        p2Form.style.display = 'none';
+        if (p2SuccessCard) {
+          p2SuccessCard.classList.add('active');
+          p2SuccessCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       } catch (err) {
-        showGlobalAlert(err.message || 'An error occurred during submission. Please try again.');
+        alert(err.message || 'An error occurred during registration. Please try again.');
       } finally {
-        setSubmitLoading(false);
+        if (registerSubmitBtn) {
+          registerSubmitBtn.disabled = false;
+          registerSubmitBtn.textContent = 'Register';
+        }
       }
     });
-  }
 
-  // Copy Reference ID
-  if (copyRefBtn) {
-    copyRefBtn.addEventListener('click', () => {
-      const id = refIdDisplay ? refIdDisplay.textContent : '';
-      if (!id) return;
+    // Reset Form for another registration
+    if (registerAnotherBtn) {
+      registerAnotherBtn.addEventListener('click', () => {
+        p2Form.reset();
+        Object.keys(fields).forEach(key => {
+          if (fields[key]) fields[key].classList.remove('has-error');
+          if (errors[key]) errors[key].classList.remove('active');
+        });
 
-      navigator.clipboard.writeText(id).then(() => {
-        const originalText = copyRefBtn.innerHTML;
-        copyRefBtn.innerHTML = `
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          Copied to Clipboard!
-        `;
-        copyRefBtn.style.backgroundColor = '#15803d';
-        copyRefBtn.style.color = '#ffffff';
-
-        setTimeout(() => {
-          copyRefBtn.innerHTML = originalText;
-          copyRefBtn.style.backgroundColor = '';
-          copyRefBtn.style.color = '';
-        }, 2200);
-      });
-    });
-  }
-
-  // Register Another Delegate
-  if (newRegistrationBtn) {
-    newRegistrationBtn.addEventListener('click', () => {
-      if (validator) validator.reset();
-      if (successCard) successCard.classList.remove('active');
-      if (form) form.style.display = 'block';
-      if (formCard) formCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  }
-
-  // =========================================================================
-  // FAQ ACCORDION
-  // =========================================================================
-  const faqItems = document.querySelectorAll('.faq-item');
-  faqItems.forEach(item => {
-    const btn = item.querySelector('.faq-question-btn');
-    if (btn) {
-      btn.addEventListener('click', () => {
-        const isOpen = item.classList.contains('active');
-        faqItems.forEach(other => other.classList.remove('active'));
-        if (!isOpen) {
-          item.classList.add('active');
-        }
+        if (p2SuccessCard) p2SuccessCard.classList.remove('active');
+        p2Form.style.display = 'flex';
+        p2Form.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     }
-  });
+  }
 
   // =========================================================================
-  // NAVIGATION & SCROLLSPY
+  // PAGE 1: BUTTON MICRO-INTERACTIONS
   // =========================================================================
-  if (siteHeader) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 20) {
-        siteHeader.classList.add('scrolled');
-      } else {
-        siteHeader.classList.remove('scrolled');
-      }
+  const registerNowBtn = document.getElementById('registerNowBtn');
+  if (registerNowBtn) {
+    registerNowBtn.addEventListener('mouseenter', () => {
+      registerNowBtn.style.transform = 'translateY(-2px) scale(1.02)';
+    });
+    registerNowBtn.addEventListener('mouseleave', () => {
+      registerNowBtn.style.transform = 'translateY(0) scale(1)';
     });
   }
-
-  if (mobileMenuBtn && mobileNav) {
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileNav.classList.toggle('open');
-    });
-  }
-
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (mobileNav) mobileNav.classList.remove('open');
-    });
-  });
-
-  // Scrollspy: active nav indicator
-  const sections = document.querySelectorAll('section[id]');
-  function updateScrollspy() {
-    const scrollY = window.pageYOffset + 120;
-
-    sections.forEach(current => {
-      const sectionHeight = current.offsetHeight;
-      const sectionTop = current.offsetTop;
-      const sectionId = current.getAttribute('id');
-
-      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-        navLinks.forEach(link => {
-          if (link.getAttribute('href') === `#${sectionId}`) {
-            link.classList.add('active');
-          } else {
-            link.classList.remove('active');
-          }
-        });
-      }
-    });
-  }
-  window.addEventListener('scroll', updateScrollspy);
 });
