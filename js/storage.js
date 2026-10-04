@@ -251,6 +251,13 @@ class RegistrationService {
         data
       );
 
+      // Live Google Sheets synchronization (safe & non-blocking)
+      try {
+        await this.syncToGoogleSheet(supabaseRecord, payload);
+      } catch (sheetSyncErr) {
+        console.warn("[Google Sheets Sync Notice]:", sheetSyncErr);
+      }
+
       try {
         sessionStorage.setItem(
           RATE_LIMIT_KEY,
@@ -290,6 +297,89 @@ class RegistrationService {
       );
 
       throw error;
+    }
+  }
+
+  parseInstitutionAndClub(val, payload = {}) {
+    if (payload.institutionName || payload.clubName) {
+      return {
+        institutionName: (payload.institutionName || val || "").trim(),
+        clubName: (payload.clubName || "").trim()
+      };
+    }
+
+    const str = (val || "").trim();
+    if (str.includes("/")) {
+      const parts = str.split("/");
+      return {
+        institutionName: parts[0].trim(),
+        clubName: parts.slice(1).join("/").trim()
+      };
+    }
+
+    if (str.includes(" - ")) {
+      const parts = str.split(" - ");
+      return {
+        institutionName: parts[0].trim(),
+        clubName: parts.slice(1).join(" - ").trim()
+      };
+    }
+
+    return {
+      institutionName: str,
+      clubName: str
+    };
+  }
+
+  async syncToGoogleSheet(record, payload = {}) {
+    const GOOGLE_SCRIPT_URL =
+      "https://script.google.com/macros/s/AKfycbxWswfZVCYl62SW9CW29Ttg0dIsSlFr-Z1SwRMMon1VIWnAvnz6ztpFAwyFBosmhQ0U/exec";
+
+    const { institutionName, clubName } =
+      this.parseInstitutionAndClub(record.institution_club_name, payload);
+
+    const sheetPayload = {
+      registration_id: record.reference_id,
+      institution_name: institutionName,
+      club_name: clubName,
+      slots: record.number_of_slots,
+      representative_name: record.representative_name,
+      contact_no: record.contact_no,
+      email: record.email,
+      status: record.status || "Confirmed",
+      submitted_at: record.registration_date
+    };
+
+    try {
+      console.log("[Google Sheets] Dispatching live sync payload:", sheetPayload);
+
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(sheetPayload)
+      });
+
+      if (!response.ok) {
+        console.warn(
+          "[Google Sheets] Sync responded with status:",
+          response.status
+        );
+      } else {
+        try {
+          const result = await response.json();
+          console.log("[Google Sheets] Sync acknowledged:", result);
+        } catch (_) {
+          console.log("[Google Sheets] Sync delivered successfully.");
+        }
+      }
+    } catch (error) {
+      // Non-fatal: Supabase registration must remain successful
+      console.warn(
+        "[Google Sheets] Sync encountered an issue (non-fatal):",
+        error.message || error
+      );
     }
   }
 }
