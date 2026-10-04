@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NSU PODIUM 2026 | Bangla Admin Dashboard</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="/favicon.png?v=2">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <!-- Admin Stylesheet -->
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- Top Navigation Header -->
+  <header class="admin-topbar">
+    <div class="topbar-inner">
+      <div class="brand-group">
+        <a href="/" class="brand-link" title="NSU PODIUM">
+          <img src="/logo.png" alt="NSU PODIUM 2026" class="brand-logo-img">
+        </a>
+        <div class="brand-meta">
+          <span class="brand-title">NSU PODIUM 2026</span>
+          <span class="admin-pill">BANGLA ADMIN</span>
+        </div>
+      </div>
+
+      <div class="user-group" id="topbarUserArea" style="display: none;">
+        <div class="user-badge">
+          <span class="user-status-dot"></span>
+          <span class="user-email-text" id="adminUserEmail">admin@nsudc.org</span>
+        </div>
+        <button type="button" class="btn-logout" id="logoutBtn" title="Sign Out">
+          Sign Out
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main View Container -->
+  <main class="admin-container">
+
+    <!-- LOGIN SCREEN (Visible when unauthenticated) -->
+    <section class="login-wrapper" id="loginWrapper">
+      <div class="login-card">
+        <div class="login-header">
+          <img src="/logo.png" alt="NSU PODIUM 2026" class="login-logo-img">
+          <h1 class="login-title">Private Admin Portal</h1>
+          <p class="login-subtitle">NSU PODIUM 2026 &bull; Bangla Registrations</p>
+        </div>
+
+        <form id="adminLoginForm" class="login-form" novalidate>
+          <div id="loginAlertBox" class="alert-box alert-error" style="display: none;" role="alert"></div>
+
+          <div class="form-group">
+            <label for="adminEmail" class="form-label">Admin Email</label>
+            <input
+              type="email"
+              id="adminEmail"
+              name="adminEmail"
+              class="form-input"
+              placeholder="admin@example.com"
+              required
+              autocomplete="email"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="adminPassword" class="form-label">Password</label>
+            <input
+              type="password"
+              id="adminPassword"
+              name="adminPassword"
+              class="form-input"
+              placeholder="••••••••••••"
+              required
+              autocomplete="current-password"
+            >
+          </div>
+
+          <button type="submit" id="loginSubmitBtn" class="btn-primary btn-block">
+            <span class="btn-text">Sign In</span>
+            <span class="btn-spinner" style="display: none;"></span>
+          </button>
+        </form>
+
+        <div class="login-footer">
+          <p class="login-security-notice">
+            🔒 Authorized personnel only. Access logged and secured via Supabase Auth &amp; Row Level Security.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD VIEW (Visible once authenticated) -->
+    <section class="dashboard-wrapper" id="dashboardWrapper" style="display: none;">
+
+      <!-- Key Metrics Overview Cards -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">TOTAL REGISTRATIONS</span>
+            <span class="metric-icon">📋</span>
+          </div>
+          <div class="metric-value" id="metricTotalRegistrations">0</div>
+          <div class="metric-desc">Teams registered (Bangla)</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">TOTAL SLOTS BOOKED</span>
+            <span class="metric-icon">🎟️</span>
+          </div>
+          <div class="metric-value highlight-cyan" id="metricTotalSlots">0</div>
+          <div class="metric-desc">Cumulative slots reserved</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">CONFIRMED TEAMS</span>
+            <span class="metric-icon">✅</span>
+          </div>
+          <div class="metric-value highlight-green" id="metricConfirmedCount">0</div>
+          <div class="metric-desc">Status: Confirmed</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">DATABASE CONNECTION</span>
+            <span class="metric-icon">⚡</span>
+          </div>
+          <div class="metric-status-row">
+            <span class="status-pulse-dot"></span>
+            <span class="metric-status-text" id="metricDbStatus">Live Connected</span>
+          </div>
+          <div class="metric-desc">Table: public.bangla_registrations</div>
+        </div>
+      </div>
+
+      <!-- Controls & Actions Toolbar -->
+      <div class="toolbar-card">
+        <div class="toolbar-controls">
+          <!-- Search Input -->
+          <div class="search-box-wrap">
+            <span class="search-icon">🔍</span>
+            <input
+              type="text"
+              id="tableSearchInput"
+              class="search-input"
+              placeholder="Search reference, institution, representative, phone, email..."
+              aria-label="Search registrations"
+            >
+            <button type="button" id="clearSearchBtn" class="clear-search-btn" title="Clear search" style="display: none;">✕</button>
+          </div>
+
+          <!-- Status Filter -->
+          <div class="filter-box-wrap">
+            <label for="statusFilterSelect" class="toolbar-label">Status:</label>
+            <select id="statusFilterSelect" class="filter-select" aria-label="Filter by status">
+              <option value="ALL">All Statuses</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Pending">Pending</option>
+              <option value="Waitlisted">Waitlisted</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+
+          <!-- Sort Order -->
+          <div class="filter-box-wrap">
+            <label for="sortOrderSelect" class="toolbar-label">Sort:</label>
+            <select id="sortOrderSelect" class="filter-select" aria-label="Sort by submission date">
+              <option value="DESC">Submitted: Newest First</option>
+              <option value="ASC">Submitted: Oldest First</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="toolbar-actions">
+          <!-- Refresh Button -->
+          <button type="button" id="refreshDataBtn" class="btn-action btn-refresh" title="Refresh data from database">
+            <span class="refresh-icon">🔄</span>
+            <span class="action-btn-text">Refresh</span>
+          </button>
+
+          <!-- Export Excel (.xlsx) Button -->
+          <button type="button" id="exportExcelBtn" class="btn-action btn-export-excel" title="Download Excel (.xlsx) file">
+            <span class="export-icon">📊</span>
+            <span class="action-btn-text">Export to Excel (.xlsx)</span>
+          </button>
+
+          <!-- Export CSV Button -->
+          <button type="button" id="exportCsvBtn" class="btn-action btn-export-csv" title="Download CSV file">
+            <span class="export-icon">📄</span>
+            <span class="action-btn-text">Export to CSV</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Registration Data Table Card -->
+      <div class="table-card">
+        <div class="table-card-header">
+          <div class="table-card-title-group">
+            <h2 class="table-card-title">Bangla Registrations</h2>
+            <span class="table-count-badge" id="tableFilteredCountBadge">Loading...</span>
+          </div>
+          <div class="table-card-timestamp" id="lastUpdatedTimestamp">
+            Last synced: Just now
+          </div>
+        </div>
+
+        <!-- Table Loading Overlay / Placeholder -->
+        <div id="tableLoadingState" class="table-loading-container" style="display: none;">
+          <div class="loading-spinner"></div>
+          <p class="loading-text">Fetching registrations from Supabase...</p>
+        </div>
+
+        <!-- Table Empty State -->
+        <div id="tableEmptyState" class="table-empty-container" style="display: none;">
+          <span class="empty-icon">📂</span>
+          <h3 class="empty-title">No Registrations Found</h3>
+          <p class="empty-desc" id="emptyStateDesc">No records match your active search and filter criteria.</p>
+        </div>
+
+        <!-- Table Container -->
+        <div class="table-responsive" id="tableResponsiveContainer">
+          <table class="data-table" id="registrationsTable">
+            <thead>
+              <tr>
+                <th class="th-sl">#</th>
+                <th class="th-id">Registration ID</th>
+                <th class="th-institution">Institution / Club Name</th>
+                <th class="th-slots text-center">Slots</th>
+                <th class="th-representative">Representative Name</th>
+                <th class="th-contact">Contact No.</th>
+                <th class="th-email">Email</th>
+                <th class="th-status text-center">Status</th>
+                <th class="th-date">Submitted At</th>
+              </tr>
+            </thead>
+            <tbody id="registrationsTableBody">
+              <!-- Dynamically populated rows -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Feedback Toast Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite"></div>
+
+  <!-- Scripts: Supabase SDK -> shared supabase.js -> SheetJS -> admin.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/supabase.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

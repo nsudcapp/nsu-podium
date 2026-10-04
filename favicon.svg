@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Dark Arcade Rounded Badge -->
+  <rect width="64" height="64" rx="14" fill="#030611"/>
+  <!-- Neon Cyan Accent Border -->
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="#00f0ff" stroke-width="2.5"/>
+  
+  <!-- Podium Microphones -->
+  <path d="M26 15 L29 20 M38 15 L35 20" stroke="#facc15" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="26" cy="14" r="1.5" fill="#facc15"/>
+  <circle cx="38" cy="14" r="1.5" fill="#facc15"/>
+
+  <!-- Podium Top Slanted Desk -->
+  <path d="M16 21 L48 21 L45 26 L19 26 Z" fill="#ffffff"/>
+  
+  <!-- Podium Body / Pillar -->
+  <rect x="22" y="27" width="20" height="23" rx="1.5" fill="#ffffff"/>
+  <!-- Inner Cutout / Frame Detail -->
+  <rect x="26" y="31" width="12" height="15" rx="1" fill="#030611"/>
+  <!-- Inner Glow Accent -->
+  <rect x="28" y="33" width="8" height="11" rx="0.5" fill="#00f0ff" opacity="0.85"/>
+
+  <!-- Podium Tiered Base -->
+  <rect x="18" y="51" width="28" height="4" rx="1" fill="#ffffff"/>
+  <rect x="15" y="55" width="34" height="4" rx="1.5" fill="#facc15"/>
+</svg>
