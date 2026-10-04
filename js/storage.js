@@ -300,48 +300,13 @@ class RegistrationService {
     }
   }
 
-  parseInstitutionAndClub(val, payload = {}) {
-    if (payload.institutionName || payload.clubName) {
-      return {
-        institutionName: (payload.institutionName || val || "").trim(),
-        clubName: (payload.clubName || "").trim()
-      };
-    }
-
-    const str = (val || "").trim();
-    if (str.includes("/")) {
-      const parts = str.split("/");
-      return {
-        institutionName: parts[0].trim(),
-        clubName: parts.slice(1).join("/").trim()
-      };
-    }
-
-    if (str.includes(" - ")) {
-      const parts = str.split(" - ");
-      return {
-        institutionName: parts[0].trim(),
-        clubName: parts.slice(1).join(" - ").trim()
-      };
-    }
-
-    return {
-      institutionName: str,
-      clubName: str
-    };
-  }
-
   async syncToGoogleSheet(record, payload = {}) {
     const GOOGLE_SCRIPT_URL =
       "https://script.google.com/macros/s/AKfycbxWswfZVCYl62SW9CW29Ttg0dIsSlFr-Z1SwRMMon1VIWnAvnz6ztpFAwyFBosmhQ0U/exec";
 
-    const { institutionName, clubName } =
-      this.parseInstitutionAndClub(record.institution_club_name, payload);
-
     const sheetPayload = {
       registration_id: record.reference_id,
-      institution_name: institutionName,
-      club_name: clubName,
+      institution_name: (record.institution_club_name || payload.institutionClubName || "").trim(),
       slots: record.number_of_slots,
       representative_name: record.representative_name,
       contact_no: record.contact_no,
