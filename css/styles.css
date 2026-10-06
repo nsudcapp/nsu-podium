@@ -749,6 +749,14 @@ html, body {
    ========================================================================== */
 
 @media (max-width: 768px) {
+  .brand-marquee-logo-link {
+    display: none;
+  }
+
+  .brand-marquee-header {
+    justify-content: flex-end;
+  }
+
   .arcade-page-wrapper {
     padding: 16px 12px;
   }
