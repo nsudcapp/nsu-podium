@@ -746,80 +746,80 @@ html, body {
 
 /* ==========================================================================
    RESPONSIVE MEDIA QUERIES (MOBILE, TABLET, DESKTOP)
+   Desktop (> 768px) is the reference design and remains 100% unchanged.
+   The rules below adapt the exact same design system responsively for mobile screens.
    ========================================================================== */
 
+/* 1. TABLET & SMALL LAPTOP ADAPTATION (<= 768px) */
 @media (max-width: 768px) {
   .arcade-page-wrapper {
-    padding: 16px 12px;
+    padding: 24px 14px;
+    min-height: 100dvh;
   }
 
   .arcade-screen-container {
-    padding: 24px 20px 30px 20px;
-    border-radius: 18px;
+    padding: 28px 24px 34px 24px;
+    border-radius: 20px;
   }
 
   .arcade-status-bar {
-    font-size: 9px;
-    margin-bottom: 24px;
+    font-size: 10px;
+    margin-bottom: 26px;
   }
 
   .arcade-main-title {
-    font-size: 28px;
-    letter-spacing: 0.04em;
+    font-size: 32px;
+    letter-spacing: 0.05em;
   }
 
   .arcade-tagline {
-    font-size: 10px;
-    letter-spacing: 0.1em;
+    font-size: 11px;
+    letter-spacing: 0.12em;
   }
 
   .arcade-podium-section {
-    max-width: 340px;
-    gap: 10px;
-    margin: 28px 0 26px 0;
+    max-width: 380px;
+    gap: 12px;
+    margin: 32px 0 28px 0;
   }
 
   .podium-pillar.step-1 .podium-block {
-    height: 95px;
-    font-size: 20px;
+    height: 105px;
+    font-size: 22px;
   }
 
   .podium-pillar.step-2 .podium-block {
-    height: 65px;
-    font-size: 16px;
-  }
-
-  .podium-pillar.step-3 .podium-block {
-    height: 52px;
-    font-size: 16px;
-  }
-
-  .gold-orb {
-    width: 34px;
-    height: 34px;
-  }
-
-  .arcade-ghost-svg {
-    width: 34px;
-    height: 34px;
-  }
-
-  .arcade-btn-yellow {
-    font-size: 11px;
-    padding: 13px 26px;
-  }
-
-  /* Page 2 on Mobile */
-  .p2-main-title {
+    height: 72px;
     font-size: 18px;
   }
 
+  .podium-pillar.step-3 .podium-block {
+    height: 58px;
+    font-size: 18px;
+  }
+
+  .gold-orb,
+  .arcade-ghost-svg {
+    width: 38px;
+    height: 38px;
+  }
+
+  .arcade-btn-yellow {
+    font-size: 12px;
+    padding: 14px 32px;
+  }
+
+  /* Page 2 on Tablet */
+  .p2-main-title {
+    font-size: 20px;
+  }
+
   .p2-sub-title {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .arcade-form-card {
-    padding: 22px 18px 26px 18px;
+    padding: 26px 24px 30px 24px;
   }
 
   .form-row-2col {
@@ -828,44 +828,420 @@ html, body {
   }
 }
 
-@media (max-width: 420px) {
+/* 2. ALL MOBILE SMARTPHONES (<= 520px) — Covers 320px, 375px, 390px, 414px, 430px */
+@media (max-width: 520px) {
+  /* Layout & Viewport Spacing */
+  .arcade-page-wrapper {
+    padding: 14px 10px 20px 10px;
+    min-height: 100dvh;
+    justify-content: flex-start;
+  }
+
   .arcade-screen-container {
-    padding: 18px 14px 24px 14px;
+    padding: 20px 14px 26px 14px;
+    border-radius: 18px;
+    border-width: 2.5px;
   }
 
-  .arcade-status-bar {
-    font-size: 8px;
-  }
-
-  .arcade-main-title {
-    font-size: 22px;
-  }
-
-  .arcade-tagline {
-    font-size: 8px;
-    letter-spacing: 0.06em;
-  }
-
-  .arcade-podium-section {
-    max-width: 290px;
+  /* Top Brand Header: Both logos kept with graceful responsive scaling */
+  .brand-marquee-header {
+    margin-bottom: 12px;
+    padding: 0 4px;
     gap: 8px;
   }
 
+  .brand-marquee-logo-link {
+    min-height: 40px;
+  }
+
+  .brand-marquee-logo-img {
+    height: clamp(26px, 7vw, 34px);
+    max-width: 58vw;
+  }
+
+  .brand-marquee-badge {
+    font-size: clamp(8px, 2.2vw, 9px);
+    padding: 6px 10px;
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Homepage Status Bar */
+  .arcade-status-bar {
+    font-size: clamp(8px, 2.3vw, 9.5px);
+    margin-bottom: clamp(16px, 4vw, 22px);
+    letter-spacing: 0.05em;
+  }
+
+  /* Homepage Title Box */
+  .arcade-title-box {
+    margin-bottom: clamp(14px, 3.5vw, 18px);
+  }
+
+  .arcade-main-title {
+    font-size: clamp(20px, 6vw, 26px);
+    letter-spacing: 0.04em;
+    line-height: 1.25;
+    margin-bottom: 10px;
+    text-shadow:
+      2px 2px 0 #1e40af,
+      4px 4px 0 #0f172a,
+      0 0 16px rgba(56, 189, 248, 0.7);
+  }
+
+  .arcade-tagline {
+    font-size: clamp(8px, 2.3vw, 9.5px);
+    letter-spacing: clamp(0.06em, 1.5vw, 0.1em);
+    gap: clamp(6px, 1.8vw, 8px);
+    white-space: nowrap;
+  }
+
+  /* Winners' Podium Visual (Proportional Heights & Spacing) */
+  .arcade-podium-section {
+    width: 100%;
+    max-width: clamp(280px, 82vw, 350px);
+    gap: clamp(8px, 2.2vw, 12px);
+    margin: clamp(20px, 5vw, 28px) 0 clamp(20px, 5vw, 26px) 0;
+  }
+
+  .podium-character-wrap {
+    height: clamp(38px, 9.5vw, 44px);
+    margin-bottom: 6px;
+  }
+
+  .gold-orb {
+    width: clamp(32px, 8.5vw, 38px);
+    height: clamp(32px, 8.5vw, 38px);
+  }
+
+  .arcade-ghost-svg {
+    width: clamp(32px, 8.5vw, 38px);
+    height: clamp(32px, 8.5vw, 38px);
+  }
+
   .podium-pillar.step-1 .podium-block {
-    height: 80px;
+    height: clamp(82px, 22vw, 100px);
+    font-size: clamp(18px, 5vw, 22px);
   }
 
   .podium-pillar.step-2 .podium-block {
-    height: 54px;
+    height: clamp(56px, 15vw, 70px);
+    font-size: clamp(15px, 4vw, 18px);
   }
 
   .podium-pillar.step-3 .podium-block {
-    height: 44px;
+    height: clamp(46px, 12.5vw, 58px);
+    font-size: clamp(15px, 4vw, 18px);
+  }
+
+  /* Homepage CTA Button: Scaled, Responsive & Retains Desktop Look */
+  .arcade-btn-yellow {
+    font-size: clamp(11px, 2.9vw, 12px);
+    padding: clamp(13px, 3.5vw, 15px) clamp(28px, 7.5vw, 38px);
+    min-height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    letter-spacing: 0.05em;
+  }
+
+  /* Page 2: Header Section & Both Logos Preserved */
+  .p2-header-section {
+    margin-bottom: clamp(14px, 3.5vw, 18px);
+    width: 100%;
+  }
+
+  .p2-logo-container {
+    padding: clamp(6px, 1.8vw, 8px) clamp(12px, 3.5vw, 18px);
+    margin-bottom: clamp(10px, 2.8vw, 14px);
+    max-width: clamp(240px, 74vw, 320px);
+    border-radius: 12px;
+  }
+
+  .p2-logo-img {
+    max-height: clamp(26px, 7vw, 34px);
+  }
+
+  .p2-main-title {
+    font-size: clamp(16px, 4.6vw, 19px);
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .p2-sub-title {
+    font-size: clamp(10px, 2.8vw, 12px);
+    margin-bottom: 8px;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+  }
+
+  .p2-caption {
+    font-size: clamp(8.5px, 2.2vw, 9.5px);
+    letter-spacing: 0.05em;
+  }
+
+  /* Page 2: Registration Form Card */
+  .arcade-form-card {
+    padding: clamp(18px, 4.5vw, 24px) clamp(14px, 3.5vw, 20px) clamp(22px, 5vw, 28px) clamp(14px, 3.5vw, 20px);
+    border-radius: 14px;
+  }
+
+  .form-card-header {
+    margin-bottom: clamp(14px, 3.5vw, 18px);
+  }
+
+  .form-card-title {
+    font-size: clamp(11.5px, 3vw, 13px);
+    margin-bottom: 5px;
+  }
+
+  .form-card-subtitle {
+    font-size: clamp(8.5px, 2.2vw, 9.5px);
+  }
+
+  /* Form Fields: Inputs >= 16px to Prevent iOS Safari Auto-Zoom */
+  .p2-form {
+    gap: clamp(12px, 3vw, 15px);
+  }
+
+  .form-field-group {
+    gap: 5px;
+  }
+
+  .field-label {
+    font-size: clamp(8.5px, 2.3vw, 9.5px);
+    letter-spacing: 0.05em;
+    line-height: 1.35;
+  }
+
+  .field-input,
+  .field-select {
+    font-size: 16px; /* Exactly >= 16px prevents iOS Safari automatic page zoom */
+    font-family: var(--font-mono);
+    padding: 10px 12px;
+    min-height: 44px; /* WCAG touch target */
+    border-radius: var(--radius-input);
+  }
+
+  .field-input::placeholder {
+    font-size: 13.5px;
+  }
+
+  .field-select {
+    padding-right: 34px;
+    background-position: right 12px center;
+    background-size: 14px;
+  }
+
+  .field-error-text {
+    font-size: clamp(8px, 2.1vw, 8.5px);
+    margin-top: 3px;
+    line-height: 1.3;
+  }
+
+  /* Submit Button on Page 2 */
+  .p2-submit-btn {
+    width: 100%;
+    font-size: clamp(11.5px, 3.1vw, 13px);
+    padding: 14px 18px;
+    min-height: 46px;
+    letter-spacing: 0.05em;
+    margin-top: 6px;
+  }
+
+  /* Page 2: Success Confirmation Card */
+  .p2-success-title {
+    font-size: clamp(12px, 3.4vw, 14px);
+    margin-bottom: 6px;
+  }
+
+  .p2-success-subtitle {
+    font-size: clamp(8.5px, 2.2vw, 9.5px);
+    margin-bottom: 14px;
+  }
+
+  .p2-ref-box {
+    padding: 10px 12px;
+    margin-bottom: 14px;
+  }
+
+  .p2-ref-code {
+    font-size: clamp(14px, 4vw, 17px);
+    letter-spacing: 0.08em;
+    word-break: break-all;
+  }
+
+  .p2-receipt-table {
+    font-size: clamp(10.5px, 2.7vw, 11.5px);
+    margin-bottom: 16px;
+  }
+
+  .p2-receipt-table th,
+  .p2-receipt-table td {
+    padding: 6px 6px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .p2-btn-secondary {
+    font-size: clamp(9px, 2.4vw, 10px);
+    padding: 10px 16px;
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Navigation Links & Footer */
+  .return-nav-bar {
+    margin-top: 14px;
+  }
+
+  .return-nav-link {
+    font-size: clamp(8.5px, 2.3vw, 9.5px);
+    padding: 8px 14px;
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .arcade-page-footer {
+    margin-top: 16px;
+  }
+
+  .arcade-footer-text {
+    font-size: clamp(7.5px, 2vw, 8.5px);
+    line-height: 1.6;
+    padding: 0 6px;
+  }
+}
+
+/* 3. ULTRA-COMPACT MOBILE SCREENS (<= 360px) — e.g. 320px devices */
+@media (max-width: 360px) {
+  .arcade-page-wrapper {
+    padding: 10px 6px 16px 6px;
+  }
+
+  .arcade-screen-container {
+    padding: 16px 10px 22px 10px;
+    border-radius: 16px;
+    border-width: 2px;
+  }
+
+  .brand-marquee-header {
+    margin-bottom: 10px;
+    padding: 0 2px;
+  }
+
+  .brand-marquee-logo-img {
+    height: 24px;
+    max-width: 54vw;
+  }
+
+  .brand-marquee-badge {
+    font-size: 7.5px;
+    padding: 5px 8px;
+    min-height: 28px;
+    letter-spacing: 0.04em;
+  }
+
+  .arcade-status-bar {
+    font-size: 7.5px;
+    letter-spacing: 0.04em;
+    margin-bottom: 14px;
+  }
+
+  .arcade-main-title {
+    font-size: 19px;
+    margin-bottom: 8px;
+  }
+
+  .arcade-tagline {
+    font-size: 7.5px;
+    letter-spacing: 0.05em;
+    gap: 4px;
+  }
+
+  .arcade-podium-section {
+    max-width: 270px;
+    gap: 6px;
+    margin: 18px 0 20px 0;
+  }
+
+  .podium-pillar.step-1 .podium-block {
+    height: 76px;
+    font-size: 17px;
+  }
+
+  .podium-pillar.step-2 .podium-block {
+    height: 52px;
+    font-size: 14px;
+  }
+
+  .podium-pillar.step-3 .podium-block {
+    height: 42px;
+    font-size: 14px;
+  }
+
+  .gold-orb,
+  .arcade-ghost-svg {
+    width: 30px;
+    height: 30px;
   }
 
   .arcade-btn-yellow {
-    width: 100%;
-    padding: 12px 16px;
     font-size: 10px;
+    padding: 12px 24px;
+    min-height: 44px;
+  }
+
+  .p2-logo-container {
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    max-width: 230px;
+  }
+
+  .p2-logo-img {
+    max-height: 24px;
+  }
+
+  .p2-main-title {
+    font-size: 15px;
+  }
+
+  .p2-sub-title {
+    font-size: 9.5px;
+    letter-spacing: 0.03em;
+  }
+
+  .arcade-form-card {
+    padding: 14px 10px 18px 10px;
+    border-radius: 12px;
+  }
+
+  .field-input,
+  .field-select {
+    padding: 9px 10px;
+  }
+
+  .field-label {
+    font-size: 8px;
+  }
+
+  .p2-submit-btn {
+    font-size: 11px;
+    padding: 12px 14px;
+    min-height: 44px;
+  }
+
+  .p2-ref-code {
+    font-size: 13.5px;
+    letter-spacing: 0.06em;
   }
 }
