@@ -750,11 +750,7 @@ html, body {
 
 @media (max-width: 768px) {
   .brand-marquee-logo-link {
-    display: none;
-  }
-
-  .brand-marquee-header {
-    justify-content: flex-end;
+    margin-left: -6px;
   }
 
   .arcade-page-wrapper {
