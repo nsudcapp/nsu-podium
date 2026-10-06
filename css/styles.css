@@ -150,6 +150,7 @@ html, body {
   gap: 12px;
   text-decoration: none;
   transition: opacity 0.2s ease;
+  margin-left: -6px;
 }
 
 .brand-marquee-logo-link:hover {
@@ -749,10 +750,6 @@ html, body {
    ========================================================================== */
 
 @media (max-width: 768px) {
-  .brand-marquee-logo-link {
-    margin-left: -6px;
-  }
-
   .arcade-page-wrapper {
     padding: 16px 12px;
   }
