@@ -150,7 +150,7 @@ html, body {
   gap: 12px;
   text-decoration: none;
   transition: opacity 0.2s ease;
-  margin-left: -6px;
+  margin-left: -10px;
 }
 
 .brand-marquee-logo-link:hover {
